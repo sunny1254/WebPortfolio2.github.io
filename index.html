@@ -1,0 +1,1359 @@
+<!doctype html>
+<html lang="th" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Portfolio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+
+    @keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ใช้กับ class animate-[modalIn_.25s_ease-out] ที่กูใส่ใน div modal */
+
+    body {
+      box-sizing: border-box;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    .typing-animation {
+      overflow: hidden;
+      border-right: 3px solid;
+      white-space: nowrap;
+      animation: typing 3s steps(40, end), blink 1s step-end infinite;
+    }
+
+    .code-bg {
+      background: #0a0a0a;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: linear-gradient(-45deg, #0f172a, #1e293b, #0f172a, #1a202c);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    .animated-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .animated-bg::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        radial-gradient(2px 2px at 20px 30px, rgba(59, 130, 246, 0.4), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(139, 92, 246, 0.3), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(16, 185, 129, 0.4), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(59, 130, 246, 0.3), transparent),
+        radial-gradient(2px 2px at 160px 30px, rgba(139, 92, 246, 0.4), transparent);
+      background-repeat: repeat;
+      background-size: 200px 100px;
+      animation: sparkle 15s linear infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(1deg); }
+      66% { transform: translate(-20px, 20px) rotate(-1deg); }
+    }
+
+    @keyframes sparkle {
+      0%   { transform: translateY(0px);   opacity: 1; }
+      50%  { opacity: 0.3; }
+      100% { transform: translateY(-100px); opacity: 1; }
+    }
+
+    .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.1;
+    }
+
+    .shape-1 {
+      top: 10%;
+      left: 10%;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+      border-radius: 50%;
+      animation: float-1 25s ease-in-out infinite;
+    }
+
+    .shape-2 {
+      top: 60%;
+      right: 15%;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(45deg, #8b5cf6, #10b981);
+      transform: rotate(45deg);
+      animation: float-2 20s ease-in-out infinite reverse;
+    }
+
+    .shape-3 {
+      bottom: 20%;
+      left: 20%;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #10b981, #3b82f6);
+      border-radius: 30%;
+      animation: float-3 30s ease-in-out infinite;
+    }
+
+    .shape-4 {
+      top: 30%;
+      right: 30%;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(45deg, #3b82f6, #10b981);
+      border-radius: 50%;
+      animation: float-4 18s ease-in-out infinite;
+    }
+
+    @keyframes float-1 {
+      0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+      33% { transform: translate(50px, -30px) rotate(120deg); }
+      66% { transform: translate(-30px, 40px) rotate(240deg); }
+    }
+
+    @keyframes float-2 {
+      0%, 100% { transform: translate(0px, 0px) rotate(45deg); }
+      50% { transform: translate(-40px, -50px) rotate(225deg); }
+    }
+
+    @keyframes float-3 {
+      0%, 100% { transform: translate(0px, 0px) scale(1); }
+      50% { transform: translate(30px, -20px) scale(1.2); }
+    }
+
+    @keyframes float-4 {
+      0%, 100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+      25% { transform: translate(20px, -30px) rotate(90deg) scale(0.8); }
+      50% { transform: translate(-25px, -10px) rotate(180deg) scale(1.1); }
+      75% { transform: translate(15px, 25px) rotate(270deg) scale(0.9); }
+    }
+
+    .terminal-window {
+      background: #1a1a1a;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .terminal-header {
+      background: #2d2d2d;
+      border-radius: 8px 8px 0 0;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f57; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #28ca42; }
+
+    .code-line {
+      font-family: 'Courier New', monospace;
+      color: #e2e8f0;
+      margin: 8px 0;
+    }
+
+    .syntax-keyword { color: #c792ea; }
+    .syntax-string  { color: #c3e88d; }
+    .syntax-function{ color: #82aaff; }
+    .syntax-comment { color: #546e7a; }
+
+    .project-card {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(148, 163, 184, 0.4);
+    }
+
+    .skill-tag {
+      background: rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+    }
+
+    .skill-tag:hover {
+      background: rgba(59, 130, 246, 0.3);
+      transform: scale(1.05);
+    }
+
+    .glow-effect {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+
+    /* ปุ่มสกิล */
+    .skill-btn {
+      padding: 8px 16px;
+      background: rgba(51, 65, 85, 0.7);
+      border: 1px solid rgba(100, 116, 139, 0.4);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      transition: 0.25s;
+    }
+    .skill-btn:hover {
+      background: rgba(71, 85, 105, 0.9);
+      transform: translateY(-2px);
+    }
+
+    /* Glow pulse ตอนเปลี่ยน skill */
+    .skill-glow {
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.7);
+      transition: box-shadow 0.4s ease-out;
+    }
+    .skill-glow-off {
+      box-shadow: none !important;
+      transition: box-shadow 0.4s ease-out;
+    }
+
+    /* Content fade */
+    .skill-fade {
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .skill-fade-show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Card bounce */
+    .skill-bounce {
+      transform: scale(0.96);
+    }
+    .skill-bounce-back {
+      transition: transform 0.28s cubic-bezier(.26,.53,.32,1.4);
+      transform: scale(1);
+    }
+
+    /* ปุ่ม skill ด้านซ้าย */
+    .skill-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    color: #e5e7eb;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    }
+
+    .skill-pill-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    }
+
+    /* ตอนเลือกอยู่ */
+    .skill-pill-active {
+    background: linear-gradient(90deg, #0ea5e9, #6366f1);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 18px 45px rgba(56, 189, 248, 0.4);
+    transform: translateY(-2px);
+    }
+
+    /* การ์ดด้านขวา (panel) animation */
+    .skill-panel {
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .skill-panel-out {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+    }
+
+    /* ตัวหนังสือข้างในให้ fade เล็ก ๆ */
+    .skill-text {
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .skill-text-hidden {
+    opacity: 0;
+    transform: translateY(4px);
+    }
+ 
+  </style>
+
+  <style>@view-transition { navigation: auto; }</style>
+</head>
+
+<body class="h-full code-bg text-white font-sans">
+  <!-- Animated Background -->
+  <div class="animated-bg"></div>
+  <!-- Floating Shapes -->
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div class="text-xl font-bold text-blue-400">
+          WELCOME TO MY PORTFOLIO !
+        </div>
+        <div class="flex space-x-6">
+          <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
+          <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+          <a href="#skills" class="hover:text-blue-400 transition-colors">Skills</a>
+          <a href="#projects" class="hover:text-blue-400 transition-colors">Achievements</a>
+          <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="min-h-full flex items-center justify-center px-6 pt-20">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 id="developer-name" class="text-5xl font-bold mb-4">Titinan Rattanaprow</h1>
+        <div id="tagline" class="text-2xl text-blue-400 mb-6 typing-animation">
+          My Portfolio &amp; My Website
+        </div>
+        <p class="text-lg text-slate-300 mb-8">
+          
+        </p>
+        <div class="flex space-x-4">
+          <a href="#projects"
+             class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors glow-effect inline-block">
+            View Projects
+          </a>
+          </button>
+        </div>
+      </div>
+
+      <!-- Terminal Window -->
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot dot-red"></div>
+          <div class="terminal-dot dot-yellow"></div>
+          <div class="terminal-dot dot-green"></div>
+          <span class="text-slate-400 text-sm ml-4">portfolio.js</span>
+        </div>
+        <div class="p-6">
+          <div class="code-line">
+            <span class="syntax-keyword">const</span> <span class="syntax-function">developer</span> = {
+          </div>
+          <div class="code-line ml-4">
+            name: <span class="syntax-string">"Titinan Rattanaprow"</span>,
+          </div>
+          <div class="code-line ml-4">
+            skills: [<span class="syntax-string">"Python"</span>, <span class="syntax-string">"JavaScript"</span>, <span class="syntax-string">"C/C++"</span>],
+          </div>
+          <div class="code-line ml-4">
+            passion: <span class="syntax-string">"Creating amazing web experiences"</span>,
+          </div>
+          <div class="code-line ml-4">
+            coffee: <span class="syntax-keyword">true</span>
+          </div>
+          <div class="code-line">};</div>
+          <div class="code-line mt-4">
+            <span class="syntax-comment">// Ready to build something awesome!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+<section id="about" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <h2 class="text-5xl font-extrabold mb-3">About Me</h2>
+      <div class="w-28 h-1.5 bg-gradient-to-r from-sky-400 via-fuchsia-400 to-sky-400 rounded-full mx-auto"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-[1.1fr,1.4fr] gap-10 items-start">
+      <!-- LEFT: PHOTO + SMALL CARDS -->
+      <div class="flex flex-col gap-6 items-stretch">
+        <!-- รูปโปรไฟล์ -->
+        <div class="bg-slate-900/80 border border-slate-700 rounded-3xl overflow-hidden shadow-[0_25px_80px_rgba(15,23,42,0.9)]">
+          <img
+            src="https://media.discordapp.net/attachments/931855545793675284/1439645080716578937/IMG_4743.jpg?ex=691b4576&is=6919f3f6&hm=d44388bca4d1854228103ecb204129d1fda6f18c8c56eb3aa392adcc9fe3399d&=&format=webp&width=754&height=1005"
+            alt="Profile"
+            class="w-full h-[340px] object-cover bg-slate-900" />
+        </div>
+
+        <!-- กล่องข้อมูลย่อย 2x2 -->
+        <div class="grid sm:grid-cols-2 gap-4">
+          <!-- มีชีวิตมาแล้ว -->
+          <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4">
+            <p class="text-slate-400 text-xs mb-1">มีชีวิตมาแล้ว</p>
+            <p id="lifeTimeText" class="text-2xl font-extrabold">18 ปี</p>
+          </div>
+
+          <!-- วันเกิด -->
+          <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4">
+            <p class="text-slate-400 text-xs mb-1">เกิดเมื่อวันที่</p>
+            <p class="text-2xl font-extrabold">14/11/2550</p>
+          </div>
+
+          <!-- สถานะ -->
+          <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4 flex flex-col justify-between">
+            <p class="text-slate-400 text-xs mb-1">สถานะ</p>
+            <div class="flex items-center gap-2">
+              <span class="text-pink-400 text-xl">♡</span>
+              <p class="font-semibold">มีแฟนเเล้วครับ</p>
+            </div>
+          </div>
+
+          <!-- Coffee -->
+          <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4 flex flex-col justify-between">
+            <p class="text-slate-400 text-xs mb-1">My Dear</p>
+            <p class="text-2xl font-extrabold">∞</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: TEXT CONTENT -->
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-2xl font-bold text-slate-200 mb-2">Who am I?</h3>
+          <p class="text-slate-300 text-[0.97rem] leading-relaxed">
+            สวัสดีครับ ผมชื่อ <span class="text-sky-400 font-semibold">ฐิตินันท์ รัตนพราว</span>
+            ตอนนี้อายุ 18 ปี เป็นนักเรียน ม.6/2 ที่ชอบในการเขียนโปรแกรมและพัฒนาเว็บไซต์
+            ชอบลองอะไรใหม่ ๆ ทั้งทางด้านเทคนิคและดีไซน์ และกำลังพัฒนาทักษะตัวเองเพื่อก้าวไปสู่สาย
+            <span class="text-fuchsia-400 font-semibold">Developer</span> เต็มตัวในอนาคต
+          </p>
+        </div>
+
+        <p class="text-slate-300 text-[0.97rem] leading-relaxed">
+          ผมเริ่มต้นจากการลองเล่น Python , Lua และเขียนเว็บเล็ก ๆ ด้วย HTML / CSS ก่อนจะค่อย ๆ
+          ขยับมาศึกษา JavaScript, C/C++, และเทคโนโลยีอื่น ๆ ที่เกี่ยวกับเว็บแอปพลิเคชัน
+          ผมชอบความรู้สึกตอนที่ไอเดียบนกระดาษกลายเป็นโปรเจกต์ที่คนอื่นใช้งานได้จริง
+          เช่น โปรเจกต์สายเทค
+        </p>
+
+        <p class="text-slate-300 text-[0.97rem] leading-relaxed">
+          นอกจากด้านเทคนิค ผมยังสนใจเรื่องการออกแบบให้ใช้งานง่าย
+          ชอบทำ UI ที่ดูสะอาดตาแต่ยังมีลูกเล่นและแอนิเมชันที่ลื่นไหล
+          ซึ่งเป็นเหตุผลที่ผมชอบเล่นกับ TailwindCSS, animation ต่าง ๆ และการจัด layout
+        </p>
+
+        <!-- What I Do -->
+        <div class="mt-4">
+          <h4 class="text-slate-200 font-semibold mb-3">What I Do</h4>
+          <ul class="space-y-2 text-slate-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-sky-400 mt-[2px]">✓</span>
+              <span>Frontend Development ด้วย React / TailwindCSS</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-sky-400 mt-[2px]">✓</span>
+              <span>พัฒนาเว็บระบบเล็ก ๆ เช่น เว็บเช็กชื่อ / เว็บเก็บข้อมูล</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-sky-400 mt-[2px]">✓</span>
+              <span>สนใจสาย Backend, Automation และโปรเจกต์สาย AI ต่อในอนาคต</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- About -->
+<section id="skills" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <h2 class="text-5xl font-extrabold mb-3">Skills</h2>
+      <div class="w-28 h-1.5 bg-gradient-to-r from-sky-400 via-fuchsia-400 to-sky-400 rounded-full mx-auto"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10 items-stretch">
+      <!-- ฝั่งซ้าย: ปุ่มสกิล -->
+      <div class="bg-slate-900/70 backdrop-blur-xl border border-slate-800 rounded-3xl px-10 py-10">
+        <div class="grid grid-cols-2 gap-4">
+
+          <!-- Python -->
+          <button class="skill-pill" data-skill="python" onclick="selectSkill('python', this)">
+            <span class="skill-pill-icon bg-amber-500/10">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                alt="Python icon"
+                class="w-5 h-5"
+              />
+            </span>
+            <span>Python</span>
+          </button>
+
+          <!-- Lua -->
+          <button class="skill-pill" data-skill="lua" onclick="selectSkill('lua', this)">
+            <span class="skill-pill-icon bg-indigo-500/10">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg"
+                alt="Lua icon"
+                class="w-5 h-5"
+              />
+            </span>
+            <span>Lua</span>
+          </button>
+
+          <!-- Java -->
+          <button class="skill-pill" data-skill="java" onclick="selectSkill('java', this)">
+            <span class="skill-pill-icon bg-orange-500/10">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                alt="Java icon"
+                class="w-5 h-5"
+              />
+            </span>
+            <span>Java</span>
+          </button>
+
+          <!-- C/C++ -->
+          <button class="skill-pill" data-skill="c_cpp" onclick="selectSkill('c_cpp', this)">
+            <span class="skill-pill-icon bg-sky-500/10">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+                alt="C/C++ icon"
+                class="w-5 h-5"
+              />
+            </span>
+            <span>C/C++</span>
+          </button>
+
+          <!-- Unity -->
+          <button class="skill-pill" data-skill="unity" onclick="selectSkill('unity', this)">
+            <span class="skill-pill-icon bg-slate-700/80">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg"
+                alt="Unity icon"
+                class="w-5 h-5"
+              />
+            </span>
+            <span>Unity</span>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- ฝั่งขวา: การ์ดรายละเอียดสกิล -->
+      <div class="bg-slate-900/80 backdrop-blur-2xl border border-slate-800 rounded-3xl px-10 py-10 skill-panel" id="skillPanel">
+        <div class="flex items-center gap-5 mb-6 skill-text" id="skillHeader">
+          <div class="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center" id="skillIconBox">
+            <img
+              id="skillIconImg"
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+              alt="Python icon"
+              class="w-10 h-10 object-contain"
+            />
+          </div>
+          <div>
+            <h3 class="text-3xl font-extrabold" id="skillTitle">Python</h3>
+            <p class="text-slate-400 text-sm mt-1">ระดับความเชี่ยวชาญ</p>
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="mb-4 skill-text" id="skillBarWrapper">
+          <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+            <div
+              id="skillBar"
+              class="h-full bg-amber-400 rounded-full transition-[width] duration-500"
+              style="width:70%"
+            ></div>
+          </div>
+          <div class="flex justify-between text-slate-400 text-xs mt-2">
+            <span>มือใหม่</span>
+            <span>ปานกลาง</span>
+            <span>เชี่ยวชาญ</span>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="mt-6 bg-slate-800/80 rounded-2xl px-5 py-4 skill-text" id="skillDescriptionBox">
+          <p class="text-slate-200 text-sm leading-relaxed" id="skillDescription">
+            เขียน Python แก้โจทย์ ทำโปรเจกต์เล็ก ๆ เข้าใจพื้นฐานการใช้ตัวแปร ฟังก์ชัน
+            และโครงสร้างข้อมูล สามารถนำไปต่อยอดงานด้าน data, automation หรือ scripting ได้
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- Projects -->
+<section id="projects" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <h2 class="text-5xl font-extrabold mb-3">Achievements</h2>
+      <div class="w-28 h-1.5 bg-gradient-to-r from-sky-400 via-fuchsia-400 to-sky-400 rounded-full mx-auto"></div>
+    </div>
+
+        <!-- Project 1 -->
+        <div class="project-card rounded-lg p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold text-blue-400">Thailand Cyber Top Talent 2025</h3>
+            <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+            </svg>
+          </div>
+          <p class="text-slate-300 mb-4">
+            ได้เข้าแข่งขันรายการ Thailand Cyber Top Talent 2025 ในรอบคัดเลือกระดับประเทศ รุ่น Junior  ได้ลำดับที่ 236 จาก 518 ทีม
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Web Application Security</span>
+            <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Digital Forensic</span>
+            <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Network Security</span>
+            <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Reverse Engineering & Pwnable</span>
+            <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Mobile Security</span>
+          </div>
+                    <!-- การ์ด 1: E-Commerce Platform -->
+            <button class="text-blue-400 hover:text-blue-300 font-semibold"
+                    onclick="openAchievement('ecommerce')">
+            View Details →
+            </button>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card rounded-lg p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold text-blue-400">Project : Syntax Game</h3>
+            <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+            </svg>
+          </div>
+          <p class="text-slate-300 mb-4">
+            Syntax Game เป็นเกมเพื่อฝึกทักษะการเขียนโปรแกรมภาษา Python ผ่านการแก้ไขข้อผิดพลาดของโค้ด (Syntax Error)
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs">Python</span>
+            <span class="bg-purple-500/20 text-purple-400 px-2 py-1 rounded text-xs">GitHub</span>
+            <span class="bg-pink-500/20 text-pink-400 px-2 py-1 rounded text-xs">Games</span>
+          </div>
+                <!-- การ์ด 2: Task Management App -->
+                <button class="text-blue-400 hover:text-blue-300 font-semibold"
+                        onclick="openAchievement('taskapp')">
+                View Details →
+                </button>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card rounded-lg p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold text-blue-400">AI Vision Camp : ปั้นมือใหม่ให้เข้าใจ AI ด้วยรูปภาพ</h3>
+            <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+            </svg>
+          </div>
+          <p class="text-slate-300 mb-4">
+            เรียนรู้ในการใช้ภาษา Python เบื้องต้น และ การสร้าง Ai เพื่อจำแนกรูปภาพโดยการใช้โปรแกรม Google Colab
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-orange-500/20 text-orange-400 px-2 py-1 rounded text-xs">Google Colab</span>
+            <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs">Python</span>
+            <span class="bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded text-xs">YOLOv8</span>
+          </div>
+                    <!-- การ์ด 3: Weather Dashboard -->
+            <button class="text-blue-400 hover:text-blue-300 font-semibold"
+                    onclick="openAchievement('weather')">
+            View Details →
+            </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Contact -->
+<section id="contact" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <h2 class="text-5xl font-extrabold mb-3">Contact</h2>
+      <div class="w-28 h-1.5 bg-gradient-to-r from-sky-400 via-fuchsia-400 to-sky-400 rounded-full mx-auto"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 mb-12">
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/t1tnqn._/"
+         target="_blank"
+         class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
+          <!-- IG ICON -->
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+               class="w-7 h-7 text-pink-400">
+            <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+            <circle cx="12" cy="12" r="4.3"></circle>
+            <circle cx="17" cy="7" r="1.4" fill="currentColor"></circle>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold mb-2">Instagram</h3>
+        <p class="text-blue-400">@t1tnqn._</p>
+      </a>
+
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/titxnan.guy/"
+         target="_blank"
+         class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
+          <!-- FB ICON -->
+          <svg fill="currentColor" viewBox="0 0 24 24"
+               class="w-7 h-7 text-blue-500">
+            <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 
+            4.84 3.44 8.87 7.94 9.8v-6.93H8v-2.87h1.94V9.79c0-1.92 
+            1.14-2.98 2.88-2.98.84 0 1.72.15 1.72.15v1.89h-.97c-.96 
+            0-1.26.6-1.26 1.21v1.46H15.5l-.31 2.87h-2.1V21.8C18.56 
+            20.87 22 16.84 22 12z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold mb-2">Facebook</h3>
+        <p class="text-blue-400">Titxnan Guy</p>
+      </a>
+
+      <!-- Email -->
+      <a href="mailto:titinan.kay@gmail.com"
+         class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
+          <!-- EMAIL ICON -->
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+               class="w-7 h-7 text-blue-300">
+            <path d="M3 5h18v14H3z"></path>
+            
+            <path d="M3 6l9 7 9-7"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold mb-2">Email</h3>
+        <p class="text-blue-400">titinan.kay@gmail.com</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 py-8 px-6 border-t border-slate-700">
+    <div class="max-w-6xl mx-auto text-center">
+      <p class="text-slate-400">© 2024 Titinan Rattanaprow. Made with ❤️ and lots of ☕</p>
+    </div>
+  </footer>
+
+  <script>
+    const defaultConfig = {
+      developer_name: "Titinan Rattanaprow",
+      tagline: "Full Stack Developer & Code Enthusiast",
+      about_text: "ชื่อ : นายฐิตินันท์ รัตนพราว\nชั้น : ม.6/2\nเลขที่ : 2",
+      email: "john@developer.com",
+      github: "@johndeveloper",
+      background_color: "#0f172a",
+      surface_color: "#1e293b",
+      text_color: "#e2e8f0",
+      primary_action_color: "#3b82f6",
+      secondary_action_color: "#64748b",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    async function onConfigChange(config) {
+      const developerName = config.developer_name || defaultConfig.developer_name;
+      const tagline = config.tagline || defaultConfig.tagline;
+      const aboutText = config.about_text || defaultConfig.about_text;
+      const email = config.email || defaultConfig.email;
+      const github = config.github || defaultConfig.github;
+
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+      const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const baseFontStack = 'system-ui, -apple-system, sans-serif';
+
+      document.getElementById('developer-name').textContent = developerName;
+      document.getElementById('tagline').textContent = tagline;
+      document.getElementById('about-text').innerHTML = aboutText.replace(/\n/g, '<br>');
+      document.getElementById('email').textContent = email;
+      document.getElementById('github').textContent = github;
+
+      document.body.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, ${surfaceColor} 100%)`;
+      document.body.style.color = textColor;
+
+      const nav = document.querySelector('nav');
+      nav.style.backgroundColor = `${surfaceColor}cc`;
+
+      const projectCards = document.querySelectorAll('.project-card');
+      projectCards.forEach(card => {
+        card.style.backgroundColor = `${surfaceColor}cc`;
+        card.style.borderColor = `${secondaryActionColor}33`;
+      });
+
+      const primaryButtons = document.querySelectorAll('.bg-blue-600');
+      primaryButtons.forEach(btn => {
+        btn.style.backgroundColor = primaryActionColor;
+      });
+
+      document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+      document.getElementById('developer-name').style.fontSize = `${baseSize * 3.125}px`;
+      document.getElementById('tagline').style.fontSize = `${baseSize * 1.5}px`;
+      document.getElementById('about-text').style.fontSize = `${baseSize * 1.125}px`;
+
+      const headings = document.querySelectorAll('h2');
+      headings.forEach(h => h.style.fontSize = `${baseSize * 2.25}px`);
+
+      const subheadings = document.querySelectorAll('h3');
+      subheadings.forEach(h => h.style.fontSize = `${baseSize * 1.25}px`);
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              window.elementSdk.setConfig({ surface_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => {
+              config.primary_action_color = value;
+              window.elementSdk.setConfig({ primary_action_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+            set: (value) => {
+              config.secondary_action_color = value;
+              window.elementSdk.setConfig({ secondary_action_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["developer_name", config.developer_name || defaultConfig.developer_name],
+        ["tagline",        config.tagline        || defaultConfig.tagline],
+        ["about_text",     config.about_text     || defaultConfig.about_text],
+        ["email",          config.email          || defaultConfig.email],
+        ["github",         config.github         || defaultConfig.github]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    // Smooth scroll nav
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Restart typing animation when hero in view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const typingElement = entry.target.querySelector('.typing-animation');
+          if (typingElement) {
+            typingElement.style.animation = 'none';
+            setTimeout(() => {
+              typingElement.style.animation = 'typing 3s steps(40, end), blink 1s step-end infinite';
+            }, 100);
+          }
+        }
+      });
+    });
+    observer.observe(document.getElementById('home'));
+
+    // ฟังก์ชันแสดง skill + glow + เด้ง
+    function showSkill(name, level, icon, desc) {
+      const nameEl = document.getElementById("skillName");
+      const iconEl = document.getElementById("skillIcon");
+      const descEl = document.getElementById("skillDesc");
+      const bar    = document.getElementById("skillBarRight");
+      const card   = document.getElementById("skillDetailCard");
+
+      if (!nameEl || !iconEl || !descEl || !bar || !card) return;
+
+      // update content
+      nameEl.textContent = name;
+      iconEl.textContent = icon;
+      descEl.textContent = desc;
+
+      // progress bar
+      bar.style.width = level + "%";
+
+      // glow pulse
+      card.classList.add("skill-glow");
+      setTimeout(() => {
+        card.classList.add("skill-glow-off");
+        card.classList.remove("skill-glow");
+        setTimeout(() => {
+          card.classList.remove("skill-glow-off");
+        }, 300);
+      }, 180);
+
+      // bounce
+      card.classList.add("skill-bounce");
+      requestAnimationFrame(() => {
+        card.classList.add("skill-bounce-back");
+        card.classList.remove("skill-bounce");
+        setTimeout(() => {
+          card.classList.remove("skill-bounce-back");
+        }, 280);
+      });
+
+      // fade content
+      [nameEl, iconEl, descEl].forEach(el => {
+        el.classList.remove("skill-fade-show");
+        el.classList.add("skill-fade");
+        setTimeout(() => {
+          el.classList.add("skill-fade-show");
+        }, 30);
+      });
+    }
+    </script>
+
+<script>
+  // วันเกิด = 14 พฤศจิกายน 2007
+  function updateLifeTime() {
+    const birth = new Date(2007, 10, 14); 
+    // เดือน 10 = พฤศจิกายน (เพราะ JavaScript เริ่มที่ 0 → 0=Jan, 10=Nov)
+
+    const now = new Date();
+
+    let years  = now.getFullYear() - birth.getFullYear();
+    let months = now.getMonth() - birth.getMonth();
+    let days   = now.getDate() - birth.getDate();
+
+    // แก้กรณีวันติดลบ → ยืมจำนวนวันจากเดือนก่อนหน้า
+    if (days < 0) {
+      months -= 1;
+      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += prevMonth.getDate();
+    }
+
+    // แก้กรณีเดือนติดลบ → ยืมปี
+    if (months < 0) {
+      years -= 1;
+      months += 12;
+    }
+
+    const el = document.getElementById("lifeTimeText");
+    if (el) {
+      el.textContent = `${years} ปี ${months} เดือน ${days} วัน`;
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", updateLifeTime);
+</script>
+
+<script>
+  /* ผลงาน */
+
+  // ข้อมูลรูปของแต่ละ Achievement
+  const achievementData = {
+    ecommerce: {
+      title: "Thailand Cyber Top Talent 2025",
+      subtitle: "ได้เข้าแข่งขันรายการ Thailand Cyber Top Talent 2025 ในรอบคัดเลือกระดับประเทศ รุ่น Junior  ได้ลำดับที่ 236 จาก 518 ทีม การแข่งขันครั้งนี้ทำให้ได้ประสบการณ์หลายอย่าง เช่น การใช้ทักษะไหวพริบ การหาช่องโหว่ของระบบต่างๆ การประสานงานความเป็นทีม ซึ่งประสบการณ์ครั้งนี้สามารถนำไปต่อยอดความรู้ด้าน Cyber Security ได้ในอนาคต",
+      images: [
+        "https://media.discordapp.net/attachments/931855545793675284/1439621693059371160/2.png?ex=691b2fae&is=6919de2e&hm=69d62a9f9446e811c4b38261c97f15853ea1639ce6c1b2c2c0d0d77bc0b16758&=&format=webp&quality=lossless",
+        "https://cdn.discordapp.com/attachments/931855545793675284/1439621724940533882/1.png?ex=691b2fb6&is=6919de36&hm=9e4211826e9c6f3fd16d2da1eec03d53e883cbfc8f61e1a0498330b311f44e4e&",
+        "https://media.discordapp.net/attachments/931855545793675284/1439622479613137146/image_1.png?ex=691b306a&is=6919deea&hm=5d7679a7964e6fcc2646d8ee584d4ab625ec5ea83e3388abb1808c6ee0570c3c&=&format=webp&quality=lossless"
+      ]
+    },
+    taskapp: {
+      title: "Project : Syntax Game",
+      subtitle: "ชื่อโปรเจกต์ : Syntax Game แนวคิดของเกม : Syntax Game เป็นเกมเพื่อฝึกทักษะการเขียนโปรแกรมภาษา Python ผ่านการแก้ไขข้อผิดพลาดของโค้ด (Syntax Error) เกมจะให้ผู้เล่นตรวจสอบโค้ดที่มีข้อผิดพลาด แล้วแก้ไขให้ถูกต้อง ระบบจะนับคะแนนตามความถูกต้องและความรวดเร็วในการแก้ไข ...",
+      images: [
+        "https://cdn.discordapp.com/attachments/931855545793675284/1439626157980123368/image_2.png?ex=691b33d7&is=6919e257&hm=b7918b199dd040b0ff8cba36c55a4625cf2617e2966aaa51ab5a88811a9582cb&"
+      ]
+    },
+    weather: {
+      title: "AI Vision Camp : ปั้นมือใหม่ให้เข้าใจ AI ด้วยรูปภาพ",
+      subtitle: "ได้เข้าร่วมค่ายอบรบ AI Vision Camp : ปั้นมือใหม่ให้เข้าใจ AI ด้วยรูปภาพ ณ คณะเทคโนโลยีสารสนเทศและการสื่อสาร มหาวิทยาลัยมหิดล เป็นค่ายที่ทำให้ผมเรียนรู้ในการใช้ภาษา Python เบื้องต้น และ การสร้าง Ai เพื่อจำแนกรูปภาพโดยการใช้โปรแกรม Google Colab เป็นค่ายที่สามารถเรียนรู้และปฏิบัติได้จริง สามารถนำไปต่อยอดในอนาคตได้",
+      images: [
+        "https://media.discordapp.net/attachments/931855545793675284/1439626984954003496/IMG_4917.jpg?ex=691b349c&is=6919e31c&hm=04bc01d8c56087821da5a9fef85d97f8ac7b4ab3d1231600c0987867c55277d7&=&format=webp&width=1353&height=902",
+        "https://cdn.discordapp.com/attachments/931855545793675284/1439626985474363604/IMG_4897.jpg?ex=691b349c&is=6919e31c&hm=352cb9f932392637fe7dee20b05f828b1661d7069aa21147cbfb38a06a83cd3a&",
+        "https://cdn.discordapp.com/attachments/931855545793675284/1439626984459210902/IMG_4927.jpg?ex=691b349c&is=6919e31c&hm=01038752099bff8eab422bf1d5f39f136d60e80ed9f8b8098f54c4e62b684d70&",
+      ]
+    }
+    
+  };
+
+  // เปิด modal รวมรูปผลงาน
+  function openAchievement(key) {
+    const data = achievementData[key];
+    if (!data) return;
+
+    const modal   = document.getElementById("achievementModal");
+    const titleEl = document.getElementById("achievementTitle");
+    const subEl   = document.getElementById("achievementSubtitle");
+    const imgBox  = document.getElementById("achievementImages");
+
+    titleEl.textContent = data.title;
+    subEl.textContent   = data.subtitle;
+
+    // ล้างรูปเก่า
+    imgBox.innerHTML = "";
+
+    // ใส่รูปใหม่
+    data.images.forEach((src) => {
+      const wrapper = document.createElement("div");
+      wrapper.className =
+        "bg-slate-900/80 border border-slate-700 rounded-2xl overflow-hidden";
+
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = data.title;
+      img.className =
+        "w-full h-52 object-cover hover:scale-105 transition-transform duration-300 cursor-zoom-in";
+
+      // คลิกที่รูป → เปิดรูปเต็ม
+      img.addEventListener("click", () => openFullImage(src));
+
+      wrapper.appendChild(img);
+      imgBox.appendChild(wrapper);
+    });
+
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+  }
+
+  function closeAchievement() {
+    const modal = document.getElementById("achievementModal");
+    if (!modal) return;
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }
+
+  // ปิด modal เมื่อคลิกพื้นหลังดำ
+  document.addEventListener("click", (e) => {
+    const modal = document.getElementById("achievementModal");
+    if (!modal) return;
+    if (e.target === modal) {
+      closeAchievement();
+    }
+  });
+
+  // ---------- FULL IMAGE LIGHTBOX ----------
+
+  function openFullImage(src) {
+    const box = document.getElementById("imageLightbox");
+    const img = document.getElementById("lightboxImage");
+    if (!box || !img) return;
+
+    img.src = src;
+    box.classList.remove("hidden");
+    box.classList.add("flex");
+  }
+
+  function closeFullImage() {
+    const box = document.getElementById("imageLightbox");
+    if (!box) return;
+    box.classList.add("hidden");
+    box.classList.remove("flex");
+  }
+
+  // คลิกพื้นหลังดำเพื่อปิด lightbox
+  document.addEventListener("click", (e) => {
+    const box = document.getElementById("imageLightbox");
+    if (!box) return;
+    if (e.target === box) {
+      closeFullImage();
+    }
+  });
+</script>
+
+
+<script>
+  // ข้อมูลแต่ละ skill (Python, Lua, Java, C/C++, Unity)
+  const skillsData = {
+    python: {
+      name: "Python",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+      level: 70,
+      barColor: "bg-amber-400",
+      desc: "เขียน Python แก้โจทย์ ทำโปรเจกต์เล็ก ๆ เข้าใจพื้นฐานฟังก์ชัน, list, dict และเริ่มต้น OOP สามารถนำไปต่อยอดสาย data / automation ได้"
+    },
+    lua: {
+      name: "Lua",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg",
+      level: 70,
+      barColor: "bg-indigo-400",
+      desc: "ใช้งาน Lua ในงานสคริปต์และการปรับแต่งระบบ เช่น เกมหรือปลั๊กอิน เข้าใจโครงสร้างภาษาและการจัดการตารางเบื้องต้น"
+    },
+    java: {
+      name: "Java",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+      level: 40,
+      barColor: "bg-orange-400",
+      desc: "รู้พื้นฐาน Java เช่น class, object, method และการจัดการ String / Collection สามารถเขียนโปรแกรมเชิงวัตถุเบื้องต้นได้"
+    },
+    c_cpp: {
+      name: "C/C++",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+      level: 35,
+      barColor: "bg-sky-400",
+      desc: "มีพื้นฐาน C/C++ ในการเขียนโค้ด low-level, ตัวแปร, pointer และโครงสร้างควบคุม ใช้สำหรับเรียนพื้นฐานระบบและ competitive programming"
+    },
+    unity: {
+      name: "Unity",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg",
+      level: 50,
+      barColor: "bg-emerald-400",
+      desc: "ใช้ Unity ทำโปรเจกต์เกมขนาดเล็ก เข้าใจ Scene, GameObject, Component และการเขียนสคริปต์ C# เพื่อควบคุมการทำงานของเกม"
+    }
+  };
+
+  // ฟังก์ชันเลือกสกิล + แอนิเมชัน
+  function selectSkill(key, el) {
+    const data = skillsData[key];
+    if (!data) return;
+
+    const panel    = document.getElementById("skillPanel");
+    const titleEl  = document.getElementById("skillTitle");
+    const iconWrap = document.getElementById("skillIconBox");
+    const iconImg  = document.getElementById("skillIconImg");
+    const bar      = document.getElementById("skillBar");
+    const descBox  = document.getElementById("skillDescriptionBox");
+    const descText = document.getElementById("skillDescription");
+
+    // 1) ทำให้การ์ด+ข้อความ fade-out นิดนึง
+    panel.classList.add("skill-panel-out");
+    [titleEl, iconWrap, bar.parentElement, descBox].forEach((elm) => {
+      elm.classList.add("skill-text-hidden");
+    });
+
+    // 2) เปลี่ยนข้อมูลหลัง delay เล็กน้อย
+    setTimeout(() => {
+      titleEl.textContent = data.name;
+
+      if (iconImg && data.icon) {
+        iconImg.src = data.icon;
+        iconImg.alt = data.name + " icon";
+      }
+
+      descText.textContent = data.desc;
+
+      const baseClass = "h-full rounded-full transition-[width] duration-500 ";
+      bar.className = baseClass + (data.barColor || "bg-cyan-400");
+      bar.style.width = data.level + "%";
+
+      panel.classList.remove("skill-panel-out");
+      [titleEl, iconWrap, bar.parentElement, descBox].forEach((elm) => {
+        elm.classList.remove("skill-text-hidden");
+        elm.classList.add("skill-text");
+      });
+    }, 150);
+
+    // 3) อัปเดตปุ่ม active
+    document.querySelectorAll(".skill-pill").forEach((btn) => {
+      btn.classList.remove("skill-pill-active");
+    });
+    if (el) {
+      el.classList.add("skill-pill-active");
+    }
+  }
+
+  // ตั้งค่าเริ่มต้นเป็น Python ตอนโหลดหน้า
+  window.addEventListener("DOMContentLoaded", () => {
+    const firstBtn = document.querySelector('.skill-pill[data-skill="python"]');
+    if (firstBtn) {
+      firstBtn.classList.add("skill-pill-active");
+      selectSkill("python", firstBtn);
+    }
+  });
+</script>
+
+
+
+
+
+<!-- Achievement Gallery Modal -->
+<div id="achievementModal"
+     class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm">
+  <div class="max-w-5xl w-[92%] bg-slate-950/95 border border-slate-700 rounded-3xl p-6 md:p-8
+              shadow-[0_30px_100px_rgba(15,23,42,0.95)] relative animate-[modalIn_.25s_ease-out]">
+
+    <!-- ปุ่มปิด -->
+    <button class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl"
+            onclick="closeAchievement()">
+      ✕
+    </button>
+
+    <!-- หัวเรื่อง -->
+    <h3 id="achievementTitle" class="text-2xl md:text-3xl font-extrabold mb-5">
+      Project Title
+    </h3>
+
+    <!-- คำอธิบายสั้น ๆ -->
+    <p id="achievementSubtitle" class="text-slate-300 text-sm mb-6">
+      Project description...
+    </p>
+
+    <!-- Gallery รูป -->
+    <div id="achievementImages"
+         class="grid sm:grid-cols-2 gap-4 max-h-[60vh] overflow-y-auto pr-1">
+      <!-- JS จะใส่ <img> เข้ามาตรงนี้ -->
+    </div>
+  </div>
+</div>
+
+<!-- Full Image Lightbox -->
+<div id="imageLightbox"
+     class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 backdrop-blur-sm">
+  <div class="relative max-w-5xl w-[95%]">
+    <!-- ปุ่มปิด -->
+    <button class="absolute -top-10 right-0 text-slate-300 hover:text-white text-2xl"
+            onclick="closeFullImage()">
+      ✕
+    </button>
+
+    <!-- รูปใหญ่ -->
+    <img id="lightboxImage"
+         src=""
+         alt="Full preview"
+         class="w-full max-h-[80vh] object-contain rounded-2xl shadow-[0_30px_90px_rgba(0,0,0,0.8)]" />
+  </div>
+</div>
+
+
+  
+</body>
+</html>
