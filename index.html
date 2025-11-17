@@ -5,22 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Developer Portfolio</title>
 
+  <script src="/_sdk/element_sdk.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
 
+    
     @keyframes modalIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* ใช้กับ class animate-[modalIn_.25s_ease-out] ที่กูใส่ใน div modal */
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
     body {
       box-sizing: border-box;
@@ -256,7 +256,6 @@
       box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
     }
 
-    /* ปุ่มสกิล */
     .skill-btn {
       padding: 8px 16px;
       background: rgba(51, 65, 85, 0.7);
@@ -270,7 +269,6 @@
       transform: translateY(-2px);
     }
 
-    /* Glow pulse ตอนเปลี่ยน skill */
     .skill-glow {
       box-shadow: 0 0 30px rgba(59, 130, 246, 0.7);
       transition: box-shadow 0.4s ease-out;
@@ -280,7 +278,6 @@
       transition: box-shadow 0.4s ease-out;
     }
 
-    /* Content fade */
     .skill-fade {
       opacity: 0;
       transform: translateY(5px);
@@ -291,7 +288,6 @@
       transform: translateY(0);
     }
 
-    /* Card bounce */
     .skill-bounce {
       transform: scale(0.96);
     }
@@ -300,63 +296,90 @@
       transform: scale(1);
     }
 
-    /* ปุ่ม skill ด้านซ้าย */
     .skill-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    border-radius: 999px;
-    background: rgba(15, 23, 42, 0.85);
-    border: 1px solid rgba(148, 163, 184, 0.35);
-    color: #e5e7eb;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: #e5e7eb;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
     }
 
     .skill-pill-icon {
-    width: 22px;
-    height: 22px;
-    border-radius: 999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
     }
 
-    /* ตอนเลือกอยู่ */
     .skill-pill-active {
-    background: linear-gradient(90deg, #0ea5e9, #6366f1);
-    border-color: transparent;
-    color: #fff;
-    box-shadow: 0 18px 45px rgba(56, 189, 248, 0.4);
-    transform: translateY(-2px);
+      background: linear-gradient(90deg, #0ea5e9, #6366f1);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 18px 45px rgba(56, 189, 248, 0.4);
+      transform: translateY(-2px);
     }
 
-    /* การ์ดด้านขวา (panel) animation */
     .skill-panel {
-    transition: transform 0.25s ease, opacity 0.25s ease;
+      transition: transform 0.25s ease, opacity 0.25s ease;
     }
 
     .skill-panel-out {
-    opacity: 0;
-    transform: translateY(10px) scale(0.98);
+      opacity: 0;
+      transform: translateY(10px) scale(0.98);
     }
 
-    /* ตัวหนังสือข้างในให้ fade เล็ก ๆ */
     .skill-text {
-    transition: opacity 0.25s ease, transform 0.25s ease;
+      transition: opacity 0.25s ease, transform 0.25s ease;
     }
 
     .skill-text-hidden {
-    opacity: 0;
-    transform: translateY(4px);
+      opacity: 0;
+      transform: translateY(4px);
     }
- 
+      /* ...ของเดิมที่มีอยู่แล้ว... */
+
+  /* ป้าย tag ทักษะ / เทคโนโลยี */
+  .tag-badge {
+    display: inline-block;
+    transition: all 0.2s ease;
+  }
+
+  .tag-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.45); /* glow เบา ๆ */
+  }
+
+/* การ์ด Achievements ที่เป็นรายการเพิ่ม (BangMod + UTCC) */
+.achievement-extra {
+  display: none;               /* ปิดแบบไม่กินที่เลย */
+}
+
+.achievement-extra.active {
+  display: block;              /* เปิดเมื่อมี class active */
+}
+
+
+/* อันนี้ต้องแยกต่างหาก */
+#achievement-list {
+    margin-bottom: 20px;
+}
+
+
+
+
   </style>
 
   <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
 </head>
 
 <body class="h-full code-bg text-white font-sans">
@@ -375,7 +398,7 @@
     <div class="max-w-6xl mx-auto px-6 py-4">
       <div class="flex justify-between items-center">
         <div class="text-xl font-bold text-blue-400">
-          WELCOME TO MY PORTFOLIO !
+          &lt;/Developer&gt;
         </div>
         <div class="flex space-x-6">
           <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
@@ -396,15 +419,12 @@
         <div id="tagline" class="text-2xl text-blue-400 mb-6 typing-animation">
           My Portfolio &amp; My Website
         </div>
-        <p class="text-lg text-slate-300 mb-8">
-          
-        </p>
+        <p class="text-lg text-slate-300 mb-8"></p>
         <div class="flex space-x-4">
           <a href="#projects"
              class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors glow-effect inline-block">
             View Projects
           </a>
-          </button>
         </div>
       </div>
 
@@ -442,127 +462,110 @@
   </section>
 
   <!-- About -->
-<section id="about" class="py-24 px-6">
-  <div class="max-w-6xl mx-auto">
-    <!-- Heading -->
-    <div class="text-center mb-12">
-      <h2 class="text-5xl font-extrabold mb-3">About Me</h2>
-      <div class="w-28 h-1.5 bg-gradient-to-r from-sky-400 via-fuchsia-400 to-sky-400 rounded-full mx-auto"></div>
-    </div>
+  <section id="about" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-5xl font-extrabold mb-3">About Me</h2>
+        <div class="w-28 h-1.5 bg-gradient-to-r from-sky-400 via-fuchsia-400 to-sky-400 rounded-full mx-auto"></div>
+      </div>
 
-    <div class="grid lg:grid-cols-[1.1fr,1.4fr] gap-10 items-start">
-      <!-- LEFT: PHOTO + SMALL CARDS -->
-      <div class="flex flex-col gap-6 items-stretch">
-        <!-- รูปโปรไฟล์ -->
-        <div class="bg-slate-900/80 border border-slate-700 rounded-3xl overflow-hidden shadow-[0_25px_80px_rgba(15,23,42,0.9)]">
-          <img
-            src="https://media.discordapp.net/attachments/931855545793675284/1439645080716578937/IMG_4743.jpg?ex=691b4576&is=6919f3f6&hm=d44388bca4d1854228103ecb204129d1fda6f18c8c56eb3aa392adcc9fe3399d&=&format=webp&width=754&height=1005"
-            alt="Profile"
-            class="w-full h-[340px] object-cover bg-slate-900" />
-        </div>
-
-        <!-- กล่องข้อมูลย่อย 2x2 -->
-        <div class="grid sm:grid-cols-2 gap-4">
-          <!-- มีชีวิตมาแล้ว -->
-          <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4">
-            <p class="text-slate-400 text-xs mb-1">มีชีวิตมาแล้ว</p>
-            <p id="lifeTimeText" class="text-2xl font-extrabold">18 ปี</p>
+      <div class="grid lg:grid-cols-[1.1fr,1.4fr] gap-10 items-start">
+        <!-- LEFT -->
+        <div class="flex flex-col gap-6 items-stretch">
+          <div class="bg-slate-900/80 border border-slate-700 rounded-3xl overflow-hidden shadow-[0_25px_80px_rgba(15,23,42,0.9)]">
+            <img
+              src="https://media.discordapp.net/attachments/931855545793675284/1439645080716578937/IMG_4743.jpg?ex=691b4576&is=6919f3f6&hm=d44388bca4d1854228103ecb204129d1fda6f18c8c56eb3aa392adcc9fe3399d&=&format=webp&width=754&height=1005"
+              alt="Profile"
+              class="w-full h-[340px] object-cover bg-slate-900" />
           </div>
 
-          <!-- วันเกิด -->
-          <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4">
-            <p class="text-slate-400 text-xs mb-1">เกิดเมื่อวันที่</p>
-            <p class="text-2xl font-extrabold">14/11/2550</p>
-          </div>
-
-          <!-- สถานะ -->
-          <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4 flex flex-col justify-between">
-            <p class="text-slate-400 text-xs mb-1">สถานะ</p>
-            <div class="flex items-center gap-2">
-              <span class="text-pink-400 text-xl">♡</span>
-              <p class="font-semibold">มีแฟนเเล้วครับ</p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4">
+              <p class="text-slate-400 text-xs mb-1">มีชีวิตมาแล้ว</p>
+              <p id="lifeTimeText" class="text-2xl font-extrabold">18 ปี</p>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4">
+              <p class="text-slate-400 text-xs mb-1">เกิดเมื่อวันที่</p>
+              <p class="text-2xl font-extrabold">14/11/2550</p>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4 flex flex-col justify-between">
+              <p class="text-slate-400 text-xs mb-1">สถานะ</p>
+              <div class="flex items-center gap-2">
+                <span class="text-pink-400 text-xl">♡</span>
+                <p class="font-semibold">มีแฟนเเล้วครับ</p>
+              </div>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4 flex flex-col justify-between">
+              <p class="text-slate-400 text-xs mb-1">My Dear</p>
+              <p class="text-2xl font-extrabold">∞</p>
             </div>
           </div>
+        </div>
 
-          <!-- Coffee -->
-          <div class="bg-slate-900/80 border border-slate-700 rounded-2xl px-5 py-4 flex flex-col justify-between">
-            <p class="text-slate-400 text-xs mb-1">My Dear</p>
-            <p class="text-2xl font-extrabold">∞</p>
+        <!-- RIGHT -->
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-2xl font-bold text-slate-200 mb-2">Who am I?</h3>
+            <p class="text-slate-300 text-[0.97rem] leading-relaxed">
+              สวัสดีครับ ผมชื่อ <span class="text-sky-400 font-semibold">ฐิตินันท์ รัตนพราว</span>
+              ตอนนี้อายุ 18 ปี เป็นนักเรียน ม.6/2 ที่ชอบในการเขียนโปรแกรมและพัฒนาเว็บไซต์
+              ชอบลองอะไรใหม่ ๆ ทั้งทางด้านเทคนิคและดีไซน์ และกำลังพัฒนาทักษะตัวเองเพื่อก้าวไปสู่สาย
+              <span class="text-fuchsia-400 font-semibold">Developer</span> เต็มตัวในอนาคต
+            </p>
+          </div>
+
+          <p class="text-slate-300 text-[0.97rem] leading-relaxed">
+            ผมเริ่มต้นจากการลองเล่น Python , Lua และเขียนเว็บเล็ก ๆ ด้วย HTML / CSS ก่อนจะค่อย ๆ
+            ขยับมาศึกษา JavaScript, C/C++, และเทคโนโลยีอื่น ๆ ที่เกี่ยวกับเว็บแอปพลิเคชัน
+            ผมชอบความรู้สึกตอนที่ไอเดียบนกระดาษกลายเป็นโปรเจกต์ที่คนอื่นใช้งานได้จริง
+          </p>
+
+          <p class="text-slate-300 text-[0.97rem] leading-relaxed">
+            นอกจากด้านเทคนิค ผมยังสนใจเรื่องการออกแบบให้ใช้งานง่าย
+            ชอบทำ UI ที่ดูสะอาดตาแต่ยังมีลูกเล่นและแอนิเมชันที่ลื่นไหล
+            ซึ่งเป็นเหตุผลที่ผมชอบเล่นกับ TailwindCSS, animation ต่าง ๆ และการจัด layout
+          </p>
+
+          <div class="mt-4">
+            <h4 class="text-slate-200 font-semibold mb-3">What I Do</h4>
+            <ul class="space-y-2 text-slate-300 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400 mt-[2px]">✓</span>
+                <span>Frontend Development ด้วย React / TailwindCSS</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400 mt-[2px]">✓</span>
+                <span>พัฒนาเว็บระบบเล็ก ๆ เช่น เว็บเช็กชื่อ / เว็บเก็บข้อมูล</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400 mt-[2px]">✓</span>
+                <span>สนใจสาย Backend, Automation และโปรเจกต์สาย AI ต่อในอนาคต</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-
-      <!-- RIGHT: TEXT CONTENT -->
-      <div class="space-y-6">
-        <div>
-          <h3 class="text-2xl font-bold text-slate-200 mb-2">Who am I?</h3>
-          <p class="text-slate-300 text-[0.97rem] leading-relaxed">
-            สวัสดีครับ ผมชื่อ <span class="text-sky-400 font-semibold">ฐิตินันท์ รัตนพราว</span>
-            ตอนนี้อายุ 18 ปี เป็นนักเรียน ม.6/2 ที่ชอบในการเขียนโปรแกรมและพัฒนาเว็บไซต์
-            ชอบลองอะไรใหม่ ๆ ทั้งทางด้านเทคนิคและดีไซน์ และกำลังพัฒนาทักษะตัวเองเพื่อก้าวไปสู่สาย
-            <span class="text-fuchsia-400 font-semibold">Developer</span> เต็มตัวในอนาคต
-          </p>
-        </div>
-
-        <p class="text-slate-300 text-[0.97rem] leading-relaxed">
-          ผมเริ่มต้นจากการลองเล่น Python , Lua และเขียนเว็บเล็ก ๆ ด้วย HTML / CSS ก่อนจะค่อย ๆ
-          ขยับมาศึกษา JavaScript, C/C++, และเทคโนโลยีอื่น ๆ ที่เกี่ยวกับเว็บแอปพลิเคชัน
-          ผมชอบความรู้สึกตอนที่ไอเดียบนกระดาษกลายเป็นโปรเจกต์ที่คนอื่นใช้งานได้จริง
-          เช่น โปรเจกต์สายเทค
-        </p>
-
-        <p class="text-slate-300 text-[0.97rem] leading-relaxed">
-          นอกจากด้านเทคนิค ผมยังสนใจเรื่องการออกแบบให้ใช้งานง่าย
-          ชอบทำ UI ที่ดูสะอาดตาแต่ยังมีลูกเล่นและแอนิเมชันที่ลื่นไหล
-          ซึ่งเป็นเหตุผลที่ผมชอบเล่นกับ TailwindCSS, animation ต่าง ๆ และการจัด layout
-        </p>
-
-        <!-- What I Do -->
-        <div class="mt-4">
-          <h4 class="text-slate-200 font-semibold mb-3">What I Do</h4>
-          <ul class="space-y-2 text-slate-300 text-sm">
-            <li class="flex items-start gap-2">
-              <span class="text-sky-400 mt-[2px]">✓</span>
-              <span>Frontend Development ด้วย React / TailwindCSS</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-sky-400 mt-[2px]">✓</span>
-              <span>พัฒนาเว็บระบบเล็ก ๆ เช่น เว็บเช็กชื่อ / เว็บเก็บข้อมูล</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-sky-400 mt-[2px]">✓</span>
-              <span>สนใจสาย Backend, Automation และโปรเจกต์สาย AI ต่อในอนาคต</span>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-  <!-- About -->
+<!-- Skills -->
 <section id="skills" class="py-24 px-6">
   <div class="max-w-6xl mx-auto">
-    <!-- Heading -->
     <div class="text-center mb-12">
       <h2 class="text-5xl font-extrabold mb-3">Skills</h2>
       <div class="w-28 h-1.5 bg-gradient-to-r from-sky-400 via-fuchsia-400 to-sky-400 rounded-full mx-auto"></div>
     </div>
 
+    <!-- สำคัญ: grid 2 คอลัมน์ ซ้าย/ขวา -->
     <div class="grid md:grid-cols-2 gap-10 items-stretch">
-      <!-- ฝั่งซ้าย: ปุ่มสกิล -->
+      <!-- LEFT: ปุ่มเลือกสกิล -->
       <div class="bg-slate-900/70 backdrop-blur-xl border border-slate-800 rounded-3xl px-10 py-10">
         <div class="grid grid-cols-2 gap-4">
-
           <!-- Python -->
           <button class="skill-pill" data-skill="python" onclick="selectSkill('python', this)">
             <span class="skill-pill-icon bg-amber-500/10">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                alt="Python icon"
-                class="w-5 h-5"
-              />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                   alt="Python icon" class="w-5 h-5" />
             </span>
             <span>Python</span>
           </button>
@@ -570,11 +573,8 @@
           <!-- Lua -->
           <button class="skill-pill" data-skill="lua" onclick="selectSkill('lua', this)">
             <span class="skill-pill-icon bg-indigo-500/10">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg"
-                alt="Lua icon"
-                class="w-5 h-5"
-              />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg"
+                   alt="Lua icon" class="w-5 h-5" />
             </span>
             <span>Lua</span>
           </button>
@@ -582,11 +582,8 @@
           <!-- Java -->
           <button class="skill-pill" data-skill="java" onclick="selectSkill('java', this)">
             <span class="skill-pill-icon bg-orange-500/10">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
-                alt="Java icon"
-                class="w-5 h-5"
-              />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                   alt="Java icon" class="w-5 h-5" />
             </span>
             <span>Java</span>
           </button>
@@ -594,40 +591,50 @@
           <!-- C/C++ -->
           <button class="skill-pill" data-skill="c_cpp" onclick="selectSkill('c_cpp', this)">
             <span class="skill-pill-icon bg-sky-500/10">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
-                alt="C/C++ icon"
-                class="w-5 h-5"
-              />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+                   alt="C/C++ icon" class="w-5 h-5" />
             </span>
             <span>C/C++</span>
+          </button>
+
+          <!-- HTML -->
+          <button class="skill-pill" data-skill="html" onclick="selectSkill('html', this)">
+            <span class="skill-pill-icon bg-orange-500/10">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                   alt="HTML icon" class="w-5 h-5" />
+            </span>
+            <span>HTML</span>
+          </button>
+
+          <!-- CSS -->
+          <button class="skill-pill" data-skill="css" onclick="selectSkill('css', this)">
+            <span class="skill-pill-icon bg-blue-500/10">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                   alt="CSS icon" class="w-5 h-5" />
+            </span>
+            <span>CSS</span>
           </button>
 
           <!-- Unity -->
           <button class="skill-pill" data-skill="unity" onclick="selectSkill('unity', this)">
             <span class="skill-pill-icon bg-slate-700/80">
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg"
-                alt="Unity icon"
-                class="w-5 h-5"
-              />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg"
+                   alt="Unity icon" class="w-5 h-5" />
             </span>
             <span>Unity</span>
           </button>
-
         </div>
       </div>
 
-      <!-- ฝั่งขวา: การ์ดรายละเอียดสกิล -->
+      <!-- RIGHT: กล่องรายละเอียดสกิล -->
       <div class="bg-slate-900/80 backdrop-blur-2xl border border-slate-800 rounded-3xl px-10 py-10 skill-panel" id="skillPanel">
+        <!-- header -->
         <div class="flex items-center gap-5 mb-6 skill-text" id="skillHeader">
           <div class="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center" id="skillIconBox">
-            <img
-              id="skillIconImg"
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-              alt="Python icon"
-              class="w-10 h-10 object-contain"
-            />
+            <img id="skillIconImg"
+                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                 alt="Python icon"
+                 class="w-10 h-10 object-contain" />
           </div>
           <div>
             <h3 class="text-3xl font-extrabold" id="skillTitle">Python</h3>
@@ -635,14 +642,12 @@
           </div>
         </div>
 
-        <!-- Progress -->
+        <!-- bar -->
         <div class="mb-4 skill-text" id="skillBarWrapper">
           <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
-            <div
-              id="skillBar"
-              class="h-full bg-amber-400 rounded-full transition-[width] duration-500"
-              style="width:70%"
-            ></div>
+            <div id="skillBar"
+                 class="h-full bg-amber-400 rounded-full transition-[width] duration-500"
+                 style="width:70%"></div>
           </div>
           <div class="flex justify-between text-slate-400 text-xs mt-2">
             <span>มือใหม่</span>
@@ -651,7 +656,7 @@
           </div>
         </div>
 
-        <!-- Description -->
+        <!-- description -->
         <div class="mt-6 bg-slate-800/80 rounded-2xl px-5 py-4 skill-text" id="skillDescriptionBox">
           <p class="text-slate-200 text-sm leading-relaxed" id="skillDescription">
             เขียน Python แก้โจทย์ ทำโปรเจกต์เล็ก ๆ เข้าใจพื้นฐานการใช้ตัวแปร ฟังก์ชัน
@@ -664,10 +669,8 @@
 </section>
 
 
-
-
-  <!-- Projects -->
-<section id="projects" class="py-24 px-6">
+<!-- Achievements -->
+<section id="projects" class="pt-24 pb-10 px-6">
   <div class="max-w-6xl mx-auto">
     <!-- Heading -->
     <div class="text-center mb-12">
@@ -675,151 +678,197 @@
       <div class="w-28 h-1.5 bg-gradient-to-r from-sky-400 via-fuchsia-400 to-sky-400 rounded-full mx-auto"></div>
     </div>
 
-        <!-- Project 1 -->
-        <div class="project-card rounded-lg p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-xl font-bold text-blue-400">Thailand Cyber Top Talent 2025</h3>
-            <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-            </svg>
-          </div>
-          <p class="text-slate-300 mb-4">
-            ได้เข้าแข่งขันรายการ Thailand Cyber Top Talent 2025 ในรอบคัดเลือกระดับประเทศ รุ่น Junior  ได้ลำดับที่ 236 จาก 518 ทีม
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Web Application Security</span>
-            <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Digital Forensic</span>
-            <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Network Security</span>
-            <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Reverse Engineering & Pwnable</span>
-            <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Mobile Security</span>
-          </div>
-                    <!-- การ์ด 1: E-Commerce Platform -->
-            <button class="text-blue-400 hover:text-blue-300 font-semibold"
-                    onclick="openAchievement('ecommerce')">
-            View Details →
-            </button>
+    <div id="achievement-list" class="space-y-6">
+      <!-- 1: Thailand Cyber Top Talent 2025 -->
+      <div class="project-card rounded-lg p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-bold text-blue-400">Thailand Cyber Top Talent 2025</h3>
+          <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+          </svg>
         </div>
+        <p class="text-slate-300 mb-4">
+          ได้เข้าแข่งขันรายการ Thailand Cyber Top Talent 2025 ในรอบคัดเลือกระดับประเทศ รุ่น Junior ได้ลำดับที่ 236 จาก 518 ทีม
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="tag-badge bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Web Application Security</span>
+          <span class="tag-badge bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Digital Forensic</span>
+          <span class="tag-badge bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Network Security</span>
+          <span class="tag-badge bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Reverse Engineering &amp; Pwnable</span>
+          <span class="tag-badge bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Mobile Security</span>
+        </div>
+        <button class="text-blue-400 hover:text-blue-300 font-semibold"
+                onclick="openAchievement('ecommerce')">
+          View Details →
+        </button>
+      </div>
 
-        <!-- Project 2 -->
-        <div class="project-card rounded-lg p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-xl font-bold text-blue-400">Project : Syntax Game</h3>
-            <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-            </svg>
-          </div>
-          <p class="text-slate-300 mb-4">
-            Syntax Game เป็นเกมเพื่อฝึกทักษะการเขียนโปรแกรมภาษา Python ผ่านการแก้ไขข้อผิดพลาดของโค้ด (Syntax Error)
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs">Python</span>
-            <span class="bg-purple-500/20 text-purple-400 px-2 py-1 rounded text-xs">GitHub</span>
-            <span class="bg-pink-500/20 text-pink-400 px-2 py-1 rounded text-xs">Games</span>
-          </div>
-                <!-- การ์ด 2: Task Management App -->
-                <button class="text-blue-400 hover:text-blue-300 font-semibold"
-                        onclick="openAchievement('taskapp')">
-                View Details →
-                </button>
+      <!-- 2: Project : Syntax Game -->
+      <div class="project-card rounded-lg p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-bold text-blue-400">Project : Syntax Game</h3>
+          <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+          </svg>
         </div>
+        <p class="text-slate-300 mb-4">
+          Syntax Game เป็นเกมเพื่อฝึกทักษะการเขียนโปรแกรมภาษา Python ผ่านการแก้ไขข้อผิดพลาดของโค้ด (Syntax Error)
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="tag-badge bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs">Python</span>
+          <span class="tag-badge bg-purple-500/20 text-purple-400 px-2 py-1 rounded text-xs">GitHub</span>
+          <span class="tag-badge bg-pink-500/20 text-pink-400 px-2 py-1 rounded text-xs">Games</span>
+        </div>
+        <button class="text-blue-400 hover:text-blue-300 font-semibold"
+                onclick="openAchievement('taskapp')">
+          View Details →
+        </button>
+      </div>
 
-        <!-- Project 3 -->
-        <div class="project-card rounded-lg p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-xl font-bold text-blue-400">AI Vision Camp : ปั้นมือใหม่ให้เข้าใจ AI ด้วยรูปภาพ</h3>
-            <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-            </svg>
-          </div>
-          <p class="text-slate-300 mb-4">
-            เรียนรู้ในการใช้ภาษา Python เบื้องต้น และ การสร้าง Ai เพื่อจำแนกรูปภาพโดยการใช้โปรแกรม Google Colab
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="bg-orange-500/20 text-orange-400 px-2 py-1 rounded text-xs">Google Colab</span>
-            <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs">Python</span>
-            <span class="bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded text-xs">YOLOv8</span>
-          </div>
-                    <!-- การ์ด 3: Weather Dashboard -->
-            <button class="text-blue-400 hover:text-blue-300 font-semibold"
-                    onclick="openAchievement('weather')">
-            View Details →
-            </button>
+      <!-- 3: AI Vision Camp -->
+      <div class="project-card rounded-lg p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-bold text-blue-400">
+            AI Vision Camp : ปั้นมือใหม่ให้เข้าใจ AI ด้วยรูปภาพ
+          </h3>
+          <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+          </svg>
         </div>
+        <p class="text-slate-300 mb-4">
+          เรียนรู้ในการใช้ภาษา Python เบื้องต้น และ การสร้าง Ai เพื่อจำแนกรูปภาพโดยการใช้โปรแกรม Google Colab
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="tag-badge bg-orange-500/20 text-orange-400 px-2 py-1 rounded text-xs">Google Colab</span>
+          <span class="tag-badge bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs">Python</span>
+          <span class="tag-badge bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded text-xs">YOLOv8</span>
+        </div>
+        <button class="text-blue-400 hover:text-blue-300 font-semibold"
+                onclick="openAchievement('weather')">
+          View Details →
+        </button>
+      </div>
+
+      <!-- 4: BangMod Hackathon 2025 (ซ่อนตอนแรก) -->
+      <div class="project-card rounded-lg p-6 achievement-extra">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-bold text-blue-400">BangMod Hackathon 2025</h3>
+          <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+          </svg>
+        </div>
+        <p class="text-slate-300 mb-4">
+          ได้เข้าร่วมแข่งขัน BangMod Hackathon ระดับประเทศรอบคัดเลือกครั้งที่ 1 ในการแข่งขันครั้งนี้ทำให้ผมได้
+          ประสบการณ์ในการเขียนภาษา C/C++ และยังได้ทักษะการวิเคราะห์ปัญหา การทำงานเป็นทีม
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="tag-badge bg-sky-500/20 text-sky-400 px-2 py-1 rounded text-xs">C/C++</span>
+        </div>
+        <button class="text-blue-400 hover:text-blue-300 font-semibold"
+                onclick="openAchievement('checkSix')">
+          View Details →
+        </button>
+      </div>
+
+      <!-- 5: UTCC Engineering Workshop 2025 (ซ่อนตอนแรก) -->
+      <div class="project-card rounded-lg p-6 achievement-extra">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-bold text-blue-400">โครงการ UTCC Engineering Workshop 2025</h3>
+          <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+          </svg>
+        </div>
+        <p class="text-slate-300 mb-4">
+          การเข้าร่วมอบรมครั้งนี้ทำให้ผมได้พื้นฐานในการใช้โปรแกรม Fusion 360 เบื้องต้นและการใช้โปรแกรม
+          Untilmaker Cura เพื่อนำไปต่อยอดในการสร้างสรรค์ผลงานต่างๆ
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="tag-badge bg-orange-500/20 text-orange-400 px-2 py-1 rounded text-xs">Fusion 360</span>
+          <span class="tag-badge bg-sky-500/20 text-sky-400 px-2 py-1 rounded text-xs">Untilmaker Cura</span>
+        </div>
+        <button class="text-blue-400 hover:text-blue-300 font-semibold"
+                onclick="openAchievement('mathTx')">
+          View Details →
+        </button>
       </div>
     </div>
-  </section>
 
-<!-- Contact -->
-<section id="contact" class="py-24 px-6">
-  <div class="max-w-6xl mx-auto">
-    <!-- Heading -->
-    <div class="text-center mb-12">
-      <h2 class="text-5xl font-extrabold mb-3">Contact</h2>
-      <div class="w-28 h-1.5 bg-gradient-to-r from-sky-400 via-fuchsia-400 to-sky-400 rounded-full mx-auto"></div>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8 mb-12">
-
-      <!-- Instagram -->
-      <a href="https://www.instagram.com/t1tnqn._/"
-         target="_blank"
-         class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
-        <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
-          <!-- IG ICON -->
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
-               class="w-7 h-7 text-pink-400">
-            <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
-            <circle cx="12" cy="12" r="4.3"></circle>
-            <circle cx="17" cy="7" r="1.4" fill="currentColor"></circle>
-          </svg>
-        </div>
-        <h3 class="text-lg font-semibold mb-2">Instagram</h3>
-        <p class="text-blue-400">@t1tnqn._</p>
-      </a>
-
-      <!-- Facebook -->
-      <a href="https://www.facebook.com/titxnan.guy/"
-         target="_blank"
-         class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
-        <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
-          <!-- FB ICON -->
-          <svg fill="currentColor" viewBox="0 0 24 24"
-               class="w-7 h-7 text-blue-500">
-            <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 
-            4.84 3.44 8.87 7.94 9.8v-6.93H8v-2.87h1.94V9.79c0-1.92 
-            1.14-2.98 2.88-2.98.84 0 1.72.15 1.72.15v1.89h-.97c-.96 
-            0-1.26.6-1.26 1.21v1.46H15.5l-.31 2.87h-2.1V21.8C18.56 
-            20.87 22 16.84 22 12z"/>
-          </svg>
-        </div>
-        <h3 class="text-lg font-semibold mb-2">Facebook</h3>
-        <p class="text-blue-400">Titxnan Guy</p>
-      </a>
-
-      <!-- Email -->
-      <a href="mailto:titinan.kay@gmail.com"
-         class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
-        <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
-          <!-- EMAIL ICON -->
-          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
-               class="w-7 h-7 text-blue-300">
-            <path d="M3 5h18v14H3z"></path>
-            
-            <path d="M3 6l9 7 9-7"></path>
-          </svg>
-        </div>
-        <h3 class="text-lg font-semibold mb-2">Email</h3>
-        <p class="text-blue-400">titinan.kay@gmail.com</p>
-      </a>
-
-    </div>
+    <!-- ปุ่มดูเพิ่ม / แสดงน้อยลง -->
+      <div class="text-center mt-2 mb-6">
+        <button id="showMoreAchievementsBtn"
+                class="px-6 py-2 rounded-full border border-sky-500 text-sky-400
+                      hover:bg-sky-500/10 hover:text-sky-300 transition">
+          ดูเพิ่มเติม
+        </button>
+      </div>
   </div>
 </section>
 
 
+  <!-- Contact -->
+  <section id="contact" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-5xl font-extrabold mb-3">Contact</h2>
+        <div class="w-28 h-1.5 bg-gradient-to-r from-sky-400 via-fuchsia-400 to-sky-400 rounded-full mx-auto"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 mb-12">
+        <!-- IG -->
+        <a href="https://www.instagram.com/t1tnqn._/"
+           target="_blank"
+           class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                 class="w-7 h-7 text-pink-400">
+              <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+              <circle cx="12" cy="12" r="4.3"></circle>
+              <circle cx="17" cy="7" r="1.4" fill="currentColor"></circle>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Instagram</h3>
+          <p class="text-blue-400">@t1tnqn._</p>
+        </a>
+
+        <!-- FB -->
+        <a href="https://www.facebook.com/titxnan.guy/"
+           target="_blank"
+           class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
+            <svg fill="currentColor" viewBox="0 0 24 24"
+                 class="w-7 h-7 text-blue-500">
+              <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 
+            4.84 3.44 8.87 7.94 9.8v-6.93H8v-2.87h1.94V9.79c0-1.92 
+            1.14-2.98 2.88-2.98.84 0 1.72.15 1.72.15v1.89h-.97c-.96 
+            0-1.26.6-1.26 1.21v1.46H15.5l-.31 2.87h-2.1V21.8C18.56 
+            20.87 22 16.84 22 12z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Facebook</h3>
+          <p class="text-blue-400">Titxnan Guy</p>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:titinan.kay@gmail.com"
+           class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+                 class="w-7 h-7 text-blue-300">
+              <path d="M3 5h18v14H3z"></path>
+              <path d="M3 6l9 7 9-7"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Email</h3>
+          <p class="text-blue-400">titinan.kay@gmail.com</p>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="bg-slate-900 py-8 px-6 border-t border-slate-700">
@@ -828,6 +877,7 @@
     </div>
   </footer>
 
+  <!-- Scripts: config + util (เหมือนเดิม) -->
   <script>
     const defaultConfig = {
       developer_name: "Titinan Rattanaprow",
@@ -973,7 +1023,7 @@
       });
     }
 
-    // Smooth scroll nav
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -984,7 +1034,7 @@
       });
     });
 
-    // Restart typing animation when hero in view
+    // typing restart
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -999,361 +1049,327 @@
       });
     });
     observer.observe(document.getElementById('home'));
+  </script>
 
-    // ฟังก์ชันแสดง skill + glow + เด้ง
-    function showSkill(name, level, icon, desc) {
-      const nameEl = document.getElementById("skillName");
-      const iconEl = document.getElementById("skillIcon");
-      const descEl = document.getElementById("skillDesc");
-      const bar    = document.getElementById("skillBarRight");
-      const card   = document.getElementById("skillDetailCard");
+  <!-- Age calc -->
+  <script>
+    function updateLifeTime() {
+      const birth = new Date(2007, 10, 14);
+      const now = new Date();
 
-      if (!nameEl || !iconEl || !descEl || !bar || !card) return;
+      let years  = now.getFullYear() - birth.getFullYear();
+      let months = now.getMonth() - birth.getMonth();
+      let days   = now.getDate() - birth.getDate();
 
-      // update content
-      nameEl.textContent = name;
-      iconEl.textContent = icon;
-      descEl.textContent = desc;
-
-      // progress bar
-      bar.style.width = level + "%";
-
-      // glow pulse
-      card.classList.add("skill-glow");
-      setTimeout(() => {
-        card.classList.add("skill-glow-off");
-        card.classList.remove("skill-glow");
-        setTimeout(() => {
-          card.classList.remove("skill-glow-off");
-        }, 300);
-      }, 180);
-
-      // bounce
-      card.classList.add("skill-bounce");
-      requestAnimationFrame(() => {
-        card.classList.add("skill-bounce-back");
-        card.classList.remove("skill-bounce");
-        setTimeout(() => {
-          card.classList.remove("skill-bounce-back");
-        }, 280);
-      });
-
-      // fade content
-      [nameEl, iconEl, descEl].forEach(el => {
-        el.classList.remove("skill-fade-show");
-        el.classList.add("skill-fade");
-        setTimeout(() => {
-          el.classList.add("skill-fade-show");
-        }, 30);
-      });
-    }
-    </script>
-
-<script>
-  // วันเกิด = 14 พฤศจิกายน 2007
-  function updateLifeTime() {
-    const birth = new Date(2007, 10, 14); 
-    // เดือน 10 = พฤศจิกายน (เพราะ JavaScript เริ่มที่ 0 → 0=Jan, 10=Nov)
-
-    const now = new Date();
-
-    let years  = now.getFullYear() - birth.getFullYear();
-    let months = now.getMonth() - birth.getMonth();
-    let days   = now.getDate() - birth.getDate();
-
-    // แก้กรณีวันติดลบ → ยืมจำนวนวันจากเดือนก่อนหน้า
-    if (days < 0) {
-      months -= 1;
-      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-      days += prevMonth.getDate();
-    }
-
-    // แก้กรณีเดือนติดลบ → ยืมปี
-    if (months < 0) {
-      years -= 1;
-      months += 12;
-    }
-
-    const el = document.getElementById("lifeTimeText");
-    if (el) {
-      el.textContent = `${years} ปี ${months} เดือน ${days} วัน`;
-    }
-  }
-
-  window.addEventListener("DOMContentLoaded", updateLifeTime);
-</script>
-
-<script>
-  /* ผลงาน */
-
-  // ข้อมูลรูปของแต่ละ Achievement
-  const achievementData = {
-    ecommerce: {
-      title: "Thailand Cyber Top Talent 2025",
-      subtitle: "ได้เข้าแข่งขันรายการ Thailand Cyber Top Talent 2025 ในรอบคัดเลือกระดับประเทศ รุ่น Junior  ได้ลำดับที่ 236 จาก 518 ทีม การแข่งขันครั้งนี้ทำให้ได้ประสบการณ์หลายอย่าง เช่น การใช้ทักษะไหวพริบ การหาช่องโหว่ของระบบต่างๆ การประสานงานความเป็นทีม ซึ่งประสบการณ์ครั้งนี้สามารถนำไปต่อยอดความรู้ด้าน Cyber Security ได้ในอนาคต",
-      images: [
-        "https://media.discordapp.net/attachments/931855545793675284/1439621693059371160/2.png?ex=691b2fae&is=6919de2e&hm=69d62a9f9446e811c4b38261c97f15853ea1639ce6c1b2c2c0d0d77bc0b16758&=&format=webp&quality=lossless",
-        "https://cdn.discordapp.com/attachments/931855545793675284/1439621724940533882/1.png?ex=691b2fb6&is=6919de36&hm=9e4211826e9c6f3fd16d2da1eec03d53e883cbfc8f61e1a0498330b311f44e4e&",
-        "https://media.discordapp.net/attachments/931855545793675284/1439622479613137146/image_1.png?ex=691b306a&is=6919deea&hm=5d7679a7964e6fcc2646d8ee584d4ab625ec5ea83e3388abb1808c6ee0570c3c&=&format=webp&quality=lossless"
-      ]
-    },
-    taskapp: {
-      title: "Project : Syntax Game",
-      subtitle: "ชื่อโปรเจกต์ : Syntax Game แนวคิดของเกม : Syntax Game เป็นเกมเพื่อฝึกทักษะการเขียนโปรแกรมภาษา Python ผ่านการแก้ไขข้อผิดพลาดของโค้ด (Syntax Error) เกมจะให้ผู้เล่นตรวจสอบโค้ดที่มีข้อผิดพลาด แล้วแก้ไขให้ถูกต้อง ระบบจะนับคะแนนตามความถูกต้องและความรวดเร็วในการแก้ไข ...",
-      images: [
-        "https://cdn.discordapp.com/attachments/931855545793675284/1439626157980123368/image_2.png?ex=691b33d7&is=6919e257&hm=b7918b199dd040b0ff8cba36c55a4625cf2617e2966aaa51ab5a88811a9582cb&"
-      ]
-    },
-    weather: {
-      title: "AI Vision Camp : ปั้นมือใหม่ให้เข้าใจ AI ด้วยรูปภาพ",
-      subtitle: "ได้เข้าร่วมค่ายอบรบ AI Vision Camp : ปั้นมือใหม่ให้เข้าใจ AI ด้วยรูปภาพ ณ คณะเทคโนโลยีสารสนเทศและการสื่อสาร มหาวิทยาลัยมหิดล เป็นค่ายที่ทำให้ผมเรียนรู้ในการใช้ภาษา Python เบื้องต้น และ การสร้าง Ai เพื่อจำแนกรูปภาพโดยการใช้โปรแกรม Google Colab เป็นค่ายที่สามารถเรียนรู้และปฏิบัติได้จริง สามารถนำไปต่อยอดในอนาคตได้",
-      images: [
-        "https://media.discordapp.net/attachments/931855545793675284/1439626984954003496/IMG_4917.jpg?ex=691b349c&is=6919e31c&hm=04bc01d8c56087821da5a9fef85d97f8ac7b4ab3d1231600c0987867c55277d7&=&format=webp&width=1353&height=902",
-        "https://cdn.discordapp.com/attachments/931855545793675284/1439626985474363604/IMG_4897.jpg?ex=691b349c&is=6919e31c&hm=352cb9f932392637fe7dee20b05f828b1661d7069aa21147cbfb38a06a83cd3a&",
-        "https://cdn.discordapp.com/attachments/931855545793675284/1439626984459210902/IMG_4927.jpg?ex=691b349c&is=6919e31c&hm=01038752099bff8eab422bf1d5f39f136d60e80ed9f8b8098f54c4e62b684d70&",
-      ]
-    }
-    
-  };
-
-  // เปิด modal รวมรูปผลงาน
-  function openAchievement(key) {
-    const data = achievementData[key];
-    if (!data) return;
-
-    const modal   = document.getElementById("achievementModal");
-    const titleEl = document.getElementById("achievementTitle");
-    const subEl   = document.getElementById("achievementSubtitle");
-    const imgBox  = document.getElementById("achievementImages");
-
-    titleEl.textContent = data.title;
-    subEl.textContent   = data.subtitle;
-
-    // ล้างรูปเก่า
-    imgBox.innerHTML = "";
-
-    // ใส่รูปใหม่
-    data.images.forEach((src) => {
-      const wrapper = document.createElement("div");
-      wrapper.className =
-        "bg-slate-900/80 border border-slate-700 rounded-2xl overflow-hidden";
-
-      const img = document.createElement("img");
-      img.src = src;
-      img.alt = data.title;
-      img.className =
-        "w-full h-52 object-cover hover:scale-105 transition-transform duration-300 cursor-zoom-in";
-
-      // คลิกที่รูป → เปิดรูปเต็ม
-      img.addEventListener("click", () => openFullImage(src));
-
-      wrapper.appendChild(img);
-      imgBox.appendChild(wrapper);
-    });
-
-    modal.classList.remove("hidden");
-    modal.classList.add("flex");
-  }
-
-  function closeAchievement() {
-    const modal = document.getElementById("achievementModal");
-    if (!modal) return;
-    modal.classList.add("hidden");
-    modal.classList.remove("flex");
-  }
-
-  // ปิด modal เมื่อคลิกพื้นหลังดำ
-  document.addEventListener("click", (e) => {
-    const modal = document.getElementById("achievementModal");
-    if (!modal) return;
-    if (e.target === modal) {
-      closeAchievement();
-    }
-  });
-
-  // ---------- FULL IMAGE LIGHTBOX ----------
-
-  function openFullImage(src) {
-    const box = document.getElementById("imageLightbox");
-    const img = document.getElementById("lightboxImage");
-    if (!box || !img) return;
-
-    img.src = src;
-    box.classList.remove("hidden");
-    box.classList.add("flex");
-  }
-
-  function closeFullImage() {
-    const box = document.getElementById("imageLightbox");
-    if (!box) return;
-    box.classList.add("hidden");
-    box.classList.remove("flex");
-  }
-
-  // คลิกพื้นหลังดำเพื่อปิด lightbox
-  document.addEventListener("click", (e) => {
-    const box = document.getElementById("imageLightbox");
-    if (!box) return;
-    if (e.target === box) {
-      closeFullImage();
-    }
-  });
-</script>
-
-
-<script>
-  // ข้อมูลแต่ละ skill (Python, Lua, Java, C/C++, Unity)
-  const skillsData = {
-    python: {
-      name: "Python",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-      level: 70,
-      barColor: "bg-amber-400",
-      desc: "เขียน Python แก้โจทย์ ทำโปรเจกต์เล็ก ๆ เข้าใจพื้นฐานฟังก์ชัน, list, dict และเริ่มต้น OOP สามารถนำไปต่อยอดสาย data / automation ได้"
-    },
-    lua: {
-      name: "Lua",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg",
-      level: 70,
-      barColor: "bg-indigo-400",
-      desc: "ใช้งาน Lua ในงานสคริปต์และการปรับแต่งระบบ เช่น เกมหรือปลั๊กอิน เข้าใจโครงสร้างภาษาและการจัดการตารางเบื้องต้น"
-    },
-    java: {
-      name: "Java",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
-      level: 40,
-      barColor: "bg-orange-400",
-      desc: "รู้พื้นฐาน Java เช่น class, object, method และการจัดการ String / Collection สามารถเขียนโปรแกรมเชิงวัตถุเบื้องต้นได้"
-    },
-    c_cpp: {
-      name: "C/C++",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
-      level: 35,
-      barColor: "bg-sky-400",
-      desc: "มีพื้นฐาน C/C++ ในการเขียนโค้ด low-level, ตัวแปร, pointer และโครงสร้างควบคุม ใช้สำหรับเรียนพื้นฐานระบบและ competitive programming"
-    },
-    unity: {
-      name: "Unity",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg",
-      level: 50,
-      barColor: "bg-emerald-400",
-      desc: "ใช้ Unity ทำโปรเจกต์เกมขนาดเล็ก เข้าใจ Scene, GameObject, Component และการเขียนสคริปต์ C# เพื่อควบคุมการทำงานของเกม"
-    }
-  };
-
-  // ฟังก์ชันเลือกสกิล + แอนิเมชัน
-  function selectSkill(key, el) {
-    const data = skillsData[key];
-    if (!data) return;
-
-    const panel    = document.getElementById("skillPanel");
-    const titleEl  = document.getElementById("skillTitle");
-    const iconWrap = document.getElementById("skillIconBox");
-    const iconImg  = document.getElementById("skillIconImg");
-    const bar      = document.getElementById("skillBar");
-    const descBox  = document.getElementById("skillDescriptionBox");
-    const descText = document.getElementById("skillDescription");
-
-    // 1) ทำให้การ์ด+ข้อความ fade-out นิดนึง
-    panel.classList.add("skill-panel-out");
-    [titleEl, iconWrap, bar.parentElement, descBox].forEach((elm) => {
-      elm.classList.add("skill-text-hidden");
-    });
-
-    // 2) เปลี่ยนข้อมูลหลัง delay เล็กน้อย
-    setTimeout(() => {
-      titleEl.textContent = data.name;
-
-      if (iconImg && data.icon) {
-        iconImg.src = data.icon;
-        iconImg.alt = data.name + " icon";
+      if (days < 0) {
+        months -= 1;
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+      if (months < 0) {
+        years -= 1;
+        months += 12;
       }
 
-      descText.textContent = data.desc;
+      const el = document.getElementById("lifeTimeText");
+      if (el) {
+        el.textContent = `${years} ปี ${months} เดือน ${days} วัน`;
+      }
+    }
 
-      const baseClass = "h-full rounded-full transition-[width] duration-500 ";
-      bar.className = baseClass + (data.barColor || "bg-cyan-400");
-      bar.style.width = data.level + "%";
+    window.addEventListener("DOMContentLoaded", updateLifeTime);
+  </script>
 
-      panel.classList.remove("skill-panel-out");
-      [titleEl, iconWrap, bar.parentElement, descBox].forEach((elm) => {
-        elm.classList.remove("skill-text-hidden");
-        elm.classList.add("skill-text");
+  <!-- Achievement modal + lightbox -->
+  <script>
+    const achievementData = {
+      ecommerce: {
+        title: "Thailand Cyber Top Talent 2025",
+        subtitle: "ได้เข้าแข่งขันรายการ Thailand Cyber Top Talent 2025 ในรอบคัดเลือกระดับประเทศ รุ่น Junior  ได้ลำดับที่ 236 จาก 518 ทีม การแข่งขันครั้งนี้ทำให้ได้ประสบการณ์หลายอย่าง เช่น การใช้ทักษะไหวพริบ การหาช่องโหว่ของระบบต่างๆ การประสานงานความเป็นทีม ซึ่งประสบการณ์ครั้งนี้สามารถนำไปต่อยอดความรู้ด้าน Cyber Security ได้ในอนาคต",
+        images: [
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439621693059371160/2.png?ex=691bd86e&is=691a86ee&hm=a2eb7c1edea9c90270b921539c0ced134161bc108321f81a6faa408dca752614&",
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439621724940533882/1.png?ex=691bd876&is=691a86f6&hm=0c4e84221a8ac4cf39853341c8a3fab6f0613eb134ffc54ee142cc0ac53426d0&",
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439622479613137146/image_1.png?ex=691bd92a&is=691a87aa&hm=d20d19da0cd79f5a55c02dc15bb3437d3480872638334dc9ce67608047634c0c&"
+        ]
+      },
+      taskapp: {
+        title: "Project : Syntax Game",
+        subtitle: "Syntax Game เป็นเกมเพื่อฝึกทักษะการเขียนโปรแกรมภาษา Python ผ่านการแก้ไขข้อผิดพลาดของโค้ด (Syntax Error) เกมจะให้ผู้เล่นตรวจสอบโค้ดที่มีข้อผิดพลาด แล้วแก้ไขให้ถูกต้อง ระบบจะนับคะแนนตามความถูกต้องและความรวดเร็วในการแก้ไข",
+        images: [
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439626157980123368/image_2.png?ex=691b33d7&is=6919e257&hm=b7918b199dd040b0ff8cba36c55a4625cf2617e2966aaa51ab5a88811a9582cb&"
+        ]
+      },
+      weather: {
+        title: "AI Vision Camp : ปั้นมือใหม่ให้เข้าใจ AI ด้วยรูปภาพ",
+        subtitle: "ได้เข้าร่วมค่ายอบรม AI Vision Camp ณ คณะเทคโนโลยีสารสนเทศและการสื่อสาร มหาวิทยาลัยมหิดล เรียนรู้การใช้ Python เบื้องต้น และการสร้าง AI จำแนกรูปภาพด้วย Google Colab และ YOLOv8 สามารถนำไปต่อยอดโปรเจกต์ AI ได้ในอนาคต",
+        images: [
+          "https://media.discordapp.net/attachments/931855545793675284/1439626984954003496/IMG_4917.jpg?ex=691b349c&is=6919e31c&hm=04bc01d8c56087821da5a9fef85d97f8ac7b4ab3d1231600c0987867c55277d7&=&format=webp&width=1353&height=902",
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439626985474363604/IMG_4897.jpg?ex=691b349c&is=6919e31c&hm=352cb9f932392637fe7dee20b05f828b1661d7069aa21147cbfb38a06a83cd3a&",
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439626984459210902/IMG_4927.jpg?ex=691b349c&is=6919e31c&hm=01038752099bff8eab422bf1d5f39f136d60e80ed9f8b8098f54c4e62b684d70&"
+        ]
+      },
+      checkSix: {
+        title: "BangMod Hackathon 2025",
+        subtitle: "ได้เข้าร่วมแข่งขัน BangMod Hackathon ระดับประเทศรอบคัดเลือกครั้งที่ 1 ในการแข่งขันครั้งนี้ทำให้ผมได้ ประสบการณ์ในการเขียนภาษา C/C++ และยังได้ทักษะการวิเคราะห์ปัญหา การทำงานเป็นทีม",
+        images: [
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439642203386544210/3.jpg?ex=691beb88&is=691a9a08&hm=8f010aa50827911abdd099258377e5f9f976814cce000c2e088436be7a90ad04&",
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439642184411254784/2.jpg?ex=691beb84&is=691a9a04&hm=35576faac0f60c7a9d2567ce73bb953256047d4257aeb7a6ceb0693f3ebf7a0c&",
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439985406555721885/image_4.png?ex=691c826a&is=691b30ea&hm=9152f984456ea95ba6edb08c8aa53d9400e2a4a4da4a3648aa90febd185fe9de&",
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439985406912499785/image_3.png?ex=691c826a&is=691b30ea&hm=d318157295a9f1012f9dae88f354e51847cd9d6f89094204a90ff451b05089ce&"
+        ]
+      },
+      mathTx: {
+        title: "โครงการ UTCC Engineering Workshop 2025",
+        subtitle: "ได้เข้าร่วมอบรมในกิจกรรม UTCC Engineering Workshop 2025 ในหัวข้อ “การออกแบบ 3 มิติ และการสร้างชิ้นงานด้วย 3D Printer” การเข้าร่วมอบรมครั้งนี้ทำให้ผมได้พื้นฐานในการใช้โปรแกรม Fusion 360 เบื้องต้นและการใช้โปรแกรม Untilmaker Cura เพื่อนำไปต่อยอดในการสร้างสรรค์ผลงานต่างๆ",
+        images: [
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439985405196767366/4C08AB74-5541-493B-A5EC-941FC879DD17.jpg?ex=691c826a&is=691b30ea&hm=ef4c4dca3b3fae5a1268573f6b2d3f7db468cc4237d413cd5dc033178513c55c&",
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439985405591294024/F3B71F93-61D1-49CD-BC57-67F5F969EE81.jpg?ex=691c826a&is=691b30ea&hm=840249d51d1df936a40e29db4d07652ef0504ac93f45781c3ba11b249f828f9d&",
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439985404915880027/556A1749-865B-47FF-8217-5311513516CF.jpg?ex=691c826a&is=691b30ea&hm=406fd2608b7172a9b1b12f85b594be0d6d307bc61ad6e6d828be43f0bee88308&",
+          "https://cdn.discordapp.com/attachments/931855545793675284/1439985405926707262/image_5.png?ex=691c826a&is=691b30ea&hm=e508c1548894952d905b77fe64e80ea06d78783d781c188405dfad4eb316dc0e&"
+        ]
+      }
+    };
+
+    function openAchievement(key) {
+      const data = achievementData[key];
+      if (!data) return;
+
+      const modal   = document.getElementById("achievementModal");
+      const titleEl = document.getElementById("achievementTitle");
+      const subEl   = document.getElementById("achievementSubtitle");
+      const imgBox  = document.getElementById("achievementImages");
+
+      titleEl.textContent = data.title;
+      subEl.textContent   = data.subtitle;
+      imgBox.innerHTML = "";
+
+      data.images.forEach((src) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "bg-slate-900/80 border border-slate-700 rounded-2xl overflow-hidden";
+
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = data.title;
+        img.className = "w-full h-52 object-cover hover:scale-105 transition-transform duration-300 cursor-zoom-in";
+
+        img.addEventListener("click", () => openFullImage(src));
+
+        wrapper.appendChild(img);
+        imgBox.appendChild(wrapper);
       });
-    }, 150);
 
-    // 3) อัปเดตปุ่ม active
-    document.querySelectorAll(".skill-pill").forEach((btn) => {
-      btn.classList.remove("skill-pill-active");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeAchievement() {
+      const modal = document.getElementById("achievementModal");
+      if (!modal) return;
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    document.addEventListener("click", (e) => {
+      const modal = document.getElementById("achievementModal");
+      if (!modal) return;
+      if (e.target === modal) closeAchievement();
     });
-    if (el) {
-      el.classList.add("skill-pill-active");
-    }
-  }
 
-  // ตั้งค่าเริ่มต้นเป็น Python ตอนโหลดหน้า
-  window.addEventListener("DOMContentLoaded", () => {
-    const firstBtn = document.querySelector('.skill-pill[data-skill="python"]');
-    if (firstBtn) {
-      firstBtn.classList.add("skill-pill-active");
-      selectSkill("python", firstBtn);
+    function openFullImage(src) {
+      const box = document.getElementById("imageLightbox");
+      const img = document.getElementById("lightboxImage");
+      if (!box || !img) return;
+
+      img.src = src;
+      box.classList.remove("hidden");
+      box.classList.add("flex");
     }
+
+    function closeFullImage() {
+      const box = document.getElementById("imageLightbox");
+      if (!box) return;
+      box.classList.add("hidden");
+      box.classList.remove("flex");
+    }
+
+    document.addEventListener("click", (e) => {
+      const box = document.getElementById("imageLightbox");
+      if (!box) return;
+      if (e.target === box) closeFullImage();
+    });
+  </script>
+
+  <!-- Skills logic -->
+  <script>
+        const skillsData = {
+          python: {
+            name: "Python",
+            icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+            level: 70,
+            barColor: "bg-amber-400",
+            desc: "เขียน Python แก้โจทย์ ทำโปรเจกต์เล็ก ๆ เข้าใจพื้นฐานฟังก์ชัน, list, dict และเริ่มต้น OOP สามารถนำไปต่อยอดสาย data / automation ได้"
+          },
+          lua: {
+            name: "Lua",
+            icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg",
+            level: 70,
+            barColor: "bg-indigo-400",
+            desc: "ใช้งาน Lua ในงานสคริปต์และการปรับแต่งระบบ เช่น เกมหรือปลั๊กอิน เข้าใจโครงสร้างภาษาและการจัดการตารางเบื้องต้น"
+          },
+          java: {
+            name: "Java",
+            icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+            level: 40,
+            barColor: "bg-orange-400",
+            desc: "รู้พื้นฐาน Java เช่น class, object, method และการจัดการ String / Collection สามารถเขียนโปรแกรมเชิงวัตถุเบื้องต้นได้"
+          },
+          c_cpp: {
+            name: "C/C++",
+            icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+            level: 20,
+            barColor: "bg-sky-400",
+            desc: "มีพื้นฐาน C/C++ ในการเขียนโค้ด low-level, ตัวแปร, pointer และโครงสร้างควบคุม ใช้สำหรับเรียนพื้นฐานระบบและ competitive programming"
+          },
+          html: {
+            name: "HTML",
+            icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+            level: 60,
+            barColor: "bg-orange-400",
+            desc: "เขียนโครงสร้างหน้าเว็บด้วย HTML5 ได้ดี จัด layout, form, semantic tag และเตรียมโครงสำหรับต่อกับ CSS / JavaScript"
+          },
+          css: {
+            name: "CSS",
+            icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+            level: 60,
+            barColor: "bg-blue-400",
+            desc: "จัดสไตล์หน้าเว็บด้วย CSS3, flexbox, grid, responsive layout และใช้ร่วมกับ TailwindCSS / Animation พื้นฐานได้"
+          },
+          unity: {
+            name: "Unity",
+            icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg",
+            level: 50,
+            barColor: "bg-emerald-400",
+            desc: "ใช้ Unity ทำโปรเจกต์เกมขนาดเล็ก เข้าใจ Scene, GameObject, Component และการเขียนสคริปต์ C# เพื่อควบคุมการทำงานของเกม"
+          }
+        };
+
+// --- Toggle แสดง / ซ่อน Achievements เพิ่มเติม (เวอร์ชัน display:none) ---
+const extraAchievementCards = document.querySelectorAll('.achievement-extra');
+const showMoreAchievementsBtn = document.getElementById('showMoreAchievementsBtn');
+
+if (showMoreAchievementsBtn && extraAchievementCards.length) {
+  let expanded = false;
+
+  // ตอนโหลดครั้งแรก ซ่อนทั้งหมดไว้ก่อน (เผื่อเผลอเปิดไว้ใน HTML)
+  extraAchievementCards.forEach(card => card.classList.remove('active'));
+
+  showMoreAchievementsBtn.addEventListener('click', () => {
+    expanded = !expanded;
+
+    extraAchievementCards.forEach(card => {
+      if (expanded) {
+        card.classList.add('active');   // โชว์การ์ดเพิ่ม
+      } else {
+        card.classList.remove('active'); // ซ่อนกลับเหลือ 3
+      }
+    });
+
+    showMoreAchievementsBtn.textContent = expanded ? 'แสดงน้อยลง' : 'ดูเพิ่มเติม';
   });
-</script>
+}
 
 
 
 
+    function selectSkill(key, el) {
+      const data = skillsData[key];
+      if (!data) return;
 
-<!-- Achievement Gallery Modal -->
-<div id="achievementModal"
-     class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm">
-  <div class="max-w-5xl w-[92%] bg-slate-950/95 border border-slate-700 rounded-3xl p-6 md:p-8
-              shadow-[0_30px_100px_rgba(15,23,42,0.95)] relative animate-[modalIn_.25s_ease-out]">
+      const panel    = document.getElementById("skillPanel");
+      const titleEl  = document.getElementById("skillTitle");
+      const iconWrap = document.getElementById("skillIconBox");
+      const iconImg  = document.getElementById("skillIconImg");
+      const bar      = document.getElementById("skillBar");
+      const descBox  = document.getElementById("skillDescriptionBox");
+      const descText = document.getElementById("skillDescription");
 
-    <!-- ปุ่มปิด -->
-    <button class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl"
-            onclick="closeAchievement()">
-      ✕
-    </button>
+      panel.classList.add("skill-panel-out");
+      [titleEl, iconWrap, bar.parentElement, descBox].forEach((elm) => {
+        elm.classList.add("skill-text-hidden");
+      });
 
-    <!-- หัวเรื่อง -->
-    <h3 id="achievementTitle" class="text-2xl md:text-3xl font-extrabold mb-5">
-      Project Title
-    </h3>
+      setTimeout(() => {
+        titleEl.textContent = data.name;
 
-    <!-- คำอธิบายสั้น ๆ -->
-    <p id="achievementSubtitle" class="text-slate-300 text-sm mb-6">
-      Project description...
-    </p>
+        if (iconImg && data.icon) {
+          iconImg.src = data.icon;
+          iconImg.alt = data.name + " icon";
+        }
 
-    <!-- Gallery รูป -->
-    <div id="achievementImages"
-         class="grid sm:grid-cols-2 gap-4 max-h-[60vh] overflow-y-auto pr-1">
-      <!-- JS จะใส่ <img> เข้ามาตรงนี้ -->
+        descText.textContent = data.desc;
+
+        const baseClass = "h-full rounded-full transition-[width] duration-500 ";
+        bar.className = baseClass + (data.barColor || "bg-cyan-400");
+        bar.style.width = data.level + "%";
+
+        panel.classList.remove("skill-panel-out");
+        [titleEl, iconWrap, bar.parentElement, descBox].forEach((elm) => {
+          elm.classList.remove("skill-text-hidden");
+          elm.classList.add("skill-text");
+        });
+      }, 150);
+
+      document.querySelectorAll(".skill-pill").forEach((btn) => {
+        btn.classList.remove("skill-pill-active");
+      });
+      if (el) {
+        el.classList.add("skill-pill-active");
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const firstBtn = document.querySelector('.skill-pill[data-skill="python"]');
+      if (firstBtn) {
+        firstBtn.classList.add("skill-pill-active");
+        selectSkill("python", firstBtn);
+      }
+    });
+  </script>
+
+  <!-- Achievement Modal -->
+  <div id="achievementModal"
+       class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm">
+    <div class="max-w-5xl w-[92%] bg-slate-950/95 border border-slate-700 rounded-3xl p-6 md:p-8
+                shadow-[0_30px_100px_rgba(15,23,42,0.95)] relative animate-[modalIn_.25s_ease-out]">
+      <button class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl"
+              onclick="closeAchievement()">✕</button>
+
+      <h3 id="achievementTitle" class="text-2xl md:text-3xl font-extrabold mb-5">
+        Project Title
+      </h3>
+
+      <p id="achievementSubtitle" class="text-slate-300 text-sm mb-6">
+        Project description...
+      </p>
+
+      <div id="achievementImages"
+           class="grid sm:grid-cols-2 gap-4 max-h-[60vh] overflow-y-auto pr-1">
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Full Image Lightbox -->
-<div id="imageLightbox"
-     class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 backdrop-blur-sm">
-  <div class="relative max-w-5xl w-[95%]">
-    <!-- ปุ่มปิด -->
-    <button class="absolute -top-10 right-0 text-slate-300 hover:text-white text-2xl"
-            onclick="closeFullImage()">
-      ✕
-    </button>
+  <!-- Full Image Lightbox -->
+  <div id="imageLightbox"
+       class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 backdrop-blur-sm">
+    <div class="relative max-w-5xl w-[95%]">
+      <button class="absolute -top-10 right-0 text-slate-300 hover:text-white text-2xl"
+              onclick="closeFullImage()">✕</button>
 
-    <!-- รูปใหญ่ -->
-    <img id="lightboxImage"
-         src=""
-         alt="Full preview"
-         class="w-full max-h-[80vh] object-contain rounded-2xl shadow-[0_30px_90px_rgba(0,0,0,0.8)]" />
+      <img id="lightboxImage"
+           src=""
+           alt="Full preview"
+           class="w-full max-h-[80vh] object-contain rounded-2xl shadow-[0_30px_90px_rgba(0,0,0,0.8)]" />
+    </div>
   </div>
-</div>
-
-
-  
 </body>
 </html>
