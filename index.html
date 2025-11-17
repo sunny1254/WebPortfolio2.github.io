@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Developer Portfolio</title>
+  <title>My Portfolio</title>
 
   <script src="/_sdk/element_sdk.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -187,6 +187,89 @@
       50% { transform: translate(-25px, -10px) rotate(180deg) scale(1.1); }
       75% { transform: translate(15px, 25px) rotate(270deg) scale(0.9); }
     }
+
+    /* nav link underline animation */
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.25s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right, #38bdf8, #a855f7, #38bdf8);
+  transform-origin: center;
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+  border-radius: 999px;
+}
+
+.nav-link:hover {
+  color: #e5e7eb; /* text-slate-200-ish */
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* card hover: ลอย + glow */
+.hover-card {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+  border-color: rgba(56, 189, 248, 0.4); /* ฟ้าอ่อน ๆ */
+  background: radial-gradient(circle at top left,
+    rgba(56, 189, 248, 0.12),
+    transparent 60%) rgba(15, 23, 42, 0.96);
+}
+
+/* ปุ่ม hover */
+.btn-ghost {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-ghost::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 0 0,
+    rgba(56, 189, 248, 0.35),
+    transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.btn-ghost:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
+  border-color: rgba(56, 189, 248, 0.7);
+  background: rgba(15, 23, 42, 0.98);
+}
+
+.btn-ghost:hover::before {
+  opacity: 1;
+}
+
+
 
     .terminal-window {
       background: #1a1a1a;
@@ -398,14 +481,14 @@
     <div class="max-w-6xl mx-auto px-6 py-4">
       <div class="flex justify-between items-center">
         <div class="text-xl font-bold text-blue-400">
-          &lt;/Developer&gt;
+          WELCOME TO MY PORTFOLIO !
         </div>
         <div class="flex space-x-6">
-          <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
-          <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
-          <a href="#skills" class="hover:text-blue-400 transition-colors">Skills</a>
-          <a href="#projects" class="hover:text-blue-400 transition-colors">Achievements</a>
-          <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#projects" class="nav-link">Achievements</a>
+            <a href="#contact" class="nav-link">Contact</a>
         </div>
       </div>
     </div>
@@ -421,10 +504,10 @@
         </div>
         <p class="text-lg text-slate-300 mb-8"></p>
         <div class="flex space-x-4">
-          <a href="#projects"
-             class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors glow-effect inline-block">
-            View Projects
-          </a>
+            <a href="#projects"
+              class="btn-ghost bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors glow-effect inline-block border border-sky-500/60">
+              View Projects
+            </a>
         </div>
       </div>
 
@@ -559,7 +642,7 @@
     <!-- สำคัญ: grid 2 คอลัมน์ ซ้าย/ขวา -->
     <div class="grid md:grid-cols-2 gap-10 items-stretch">
       <!-- LEFT: ปุ่มเลือกสกิล -->
-      <div class="bg-slate-900/70 backdrop-blur-xl border border-slate-800 rounded-3xl px-10 py-10">
+      <div class="bg-slate-900/70 backdrop-blur-xl border border-slate-800 rounded-3xl px-10 py-10 hover-card">
         <div class="grid grid-cols-2 gap-4">
           <!-- Python -->
           <button class="skill-pill" data-skill="python" onclick="selectSkill('python', this)">
@@ -627,7 +710,7 @@
       </div>
 
       <!-- RIGHT: กล่องรายละเอียดสกิล -->
-      <div class="bg-slate-900/80 backdrop-blur-2xl border border-slate-800 rounded-3xl px-10 py-10 skill-panel" id="skillPanel">
+      <div class="bg-slate-900/80 backdrop-blur-2xl border border-slate-800 rounded-3xl px-10 py-10 skill-panel hover-card" id="skillPanel">
         <!-- header -->
         <div class="flex items-center gap-5 mb-6 skill-text" id="skillHeader">
           <div class="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center" id="skillIconBox">
@@ -680,7 +763,7 @@
 
     <div id="achievement-list" class="space-y-6">
       <!-- 1: Thailand Cyber Top Talent 2025 -->
-      <div class="project-card rounded-lg p-6">
+      <div class="project-card hover-card rounded-lg p-6">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-xl font-bold text-blue-400">Thailand Cyber Top Talent 2025</h3>
           <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
@@ -698,14 +781,14 @@
           <span class="tag-badge bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Reverse Engineering &amp; Pwnable</span>
           <span class="tag-badge bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Mobile Security</span>
         </div>
-        <button class="text-blue-400 hover:text-blue-300 font-semibold"
+        <button class="btn-ghost text-blue-400 hover:text-blue-300 font-semibold border border-transparent px-3 py-1 rounded-full"
                 onclick="openAchievement('ecommerce')">
           View Details →
         </button>
       </div>
 
       <!-- 2: Project : Syntax Game -->
-      <div class="project-card rounded-lg p-6">
+      <div class="project-card hover-card rounded-lg p-6">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-xl font-bold text-blue-400">Project : Syntax Game</h3>
           <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
@@ -721,14 +804,14 @@
           <span class="tag-badge bg-purple-500/20 text-purple-400 px-2 py-1 rounded text-xs">GitHub</span>
           <span class="tag-badge bg-pink-500/20 text-pink-400 px-2 py-1 rounded text-xs">Games</span>
         </div>
-        <button class="text-blue-400 hover:text-blue-300 font-semibold"
+        <button class="btn-ghost text-blue-400 hover:text-blue-300 font-semibold border border-transparent px-3 py-1 rounded-full"
                 onclick="openAchievement('taskapp')">
           View Details →
         </button>
       </div>
 
       <!-- 3: AI Vision Camp -->
-      <div class="project-card rounded-lg p-6">
+      <div class="project-card hover-card rounded-lg p-6">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-xl font-bold text-blue-400">
             AI Vision Camp : ปั้นมือใหม่ให้เข้าใจ AI ด้วยรูปภาพ
@@ -746,14 +829,14 @@
           <span class="tag-badge bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs">Python</span>
           <span class="tag-badge bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded text-xs">YOLOv8</span>
         </div>
-        <button class="text-blue-400 hover:text-blue-300 font-semibold"
+        <button class="btn-ghost text-blue-400 hover:text-blue-300 font-semibold border border-transparent px-3 py-1 rounded-full"
                 onclick="openAchievement('weather')">
           View Details →
         </button>
       </div>
 
       <!-- 4: BangMod Hackathon 2025 (ซ่อนตอนแรก) -->
-      <div class="project-card rounded-lg p-6 achievement-extra">
+      <div class="project-card hover-card rounded-lg p-6 achievement-extra">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-xl font-bold text-blue-400">BangMod Hackathon 2025</h3>
           <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
@@ -768,14 +851,14 @@
         <div class="flex flex-wrap gap-2 mb-4">
           <span class="tag-badge bg-sky-500/20 text-sky-400 px-2 py-1 rounded text-xs">C/C++</span>
         </div>
-        <button class="text-blue-400 hover:text-blue-300 font-semibold"
+        <button class="btn-ghost text-blue-400 hover:text-blue-300 font-semibold border border-transparent px-3 py-1 rounded-full"
                 onclick="openAchievement('checkSix')">
           View Details →
         </button>
       </div>
 
       <!-- 5: UTCC Engineering Workshop 2025 (ซ่อนตอนแรก) -->
-      <div class="project-card rounded-lg p-6 achievement-extra">
+      <div class="project-card hover-card rounded-lg p-6 achievement-extra">
         <div class="flex items-center justify-between mb-4">
           <h3 class="text-xl font-bold text-blue-400">โครงการ UTCC Engineering Workshop 2025</h3>
           <svg class="w-6 h-6 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
@@ -791,7 +874,7 @@
           <span class="tag-badge bg-orange-500/20 text-orange-400 px-2 py-1 rounded text-xs">Fusion 360</span>
           <span class="tag-badge bg-sky-500/20 text-sky-400 px-2 py-1 rounded text-xs">Untilmaker Cura</span>
         </div>
-        <button class="text-blue-400 hover:text-blue-300 font-semibold"
+        <button class="btn-ghost text-blue-400 hover:text-blue-300 font-semibold border border-transparent px-3 py-1 rounded-full"
                 onclick="openAchievement('mathTx')">
           View Details →
         </button>
@@ -801,10 +884,11 @@
     <!-- ปุ่มดูเพิ่ม / แสดงน้อยลง -->
       <div class="text-center mt-2 mb-6">
         <button id="showMoreAchievementsBtn"
-                class="px-6 py-2 rounded-full border border-sky-500 text-sky-400
+                class="btn-ghost px-6 py-2 rounded-full border border-sky-500 text-sky-400
                       hover:bg-sky-500/10 hover:text-sky-300 transition">
           ดูเพิ่มเติม
         </button>
+
       </div>
   </div>
 </section>
@@ -820,9 +904,10 @@
 
       <div class="grid md:grid-cols-3 gap-8 mb-12">
         <!-- IG -->
-        <a href="https://www.instagram.com/t1tnqn._/"
-           target="_blank"
-           class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
+          <a href="https://www.instagram.com/t1tnqn._/"
+            target="_blank"
+            class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block hover-card">
+
           <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
             <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
                  class="w-7 h-7 text-pink-400">
@@ -838,7 +923,7 @@
         <!-- FB -->
         <a href="https://www.facebook.com/titxnan.guy/"
            target="_blank"
-           class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
+           class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block hover-card">
           <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
             <svg fill="currentColor" viewBox="0 0 24 24"
                  class="w-7 h-7 text-blue-500">
@@ -855,7 +940,7 @@
 
         <!-- Email -->
         <a href="mailto:titinan.kay@gmail.com"
-           class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block">
+           class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition block hover-card">
           <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 bg-slate-700">
             <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
                  class="w-7 h-7 text-blue-300">
